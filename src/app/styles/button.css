@@ -1,0 +1,7 @@
+.btn-primary {
+  background: linear-gradient(145deg, #336095, #20436d) !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(145deg, #336095, #20436d, 0.5) !important;
+}

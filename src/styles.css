@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url("app/styles/button.css");
+@import url("app/styles/selects.css");
 :root {
-  --primary: #3f72af; /* teal */
+  --primary: #3f72af; /* blue */
   --secondary: #dbe2ef; /* gray */
   --light: #f9f7f7; /* white */
   --dark: #112d4e; /* black */
+}
+
+body {
+  font-family: "Raleway";
 }

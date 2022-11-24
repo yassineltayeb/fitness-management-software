@@ -10,11 +10,10 @@ const authRoutes: Route[] = [
     path: '',
     component: AuthComponent,
     children: [
-      { path: 'login', component: LoginComponent },
+      { path: '', component: LoginComponent },
       { path: 'signup', component: SignupComponent }
     ]
   }
-
 ];
 
 @NgModule({

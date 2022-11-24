@@ -1,0 +1,4 @@
+.form-select:invalid {
+  color: #6c757d !important;
+  opacity: 1;
+}

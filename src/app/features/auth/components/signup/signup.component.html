@@ -1,1 +1,110 @@
-<p>signup works!</p>
+<form>
+  <div class="from-group mt-3">
+    <input
+      type="text"
+      name="firstName"
+      id="firstName"
+      placeholder="First Name"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="text"
+      name="lastName"
+      id="lastName"
+      placeholder="Last Name"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <select required class="form-select">
+      <option value="" selected disabled hidden>Select Gender</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="email"
+      name="email"
+      id="email"
+      placeholder="Email Address"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="text"
+      name="phone"
+      id="phone"
+      placeholder="+971xxxxxxxxx"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <select required class="form-select">
+      <option value="" selected disabled hidden>Select County</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+  </div>
+
+  <div class="from-group mt-3">
+    <select required class="form-select">
+      <option value="" selected disabled hidden>Select City</option>
+      <option value="1">Male</option>
+      <option value="2">Female</option>
+    </select>
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="date"
+      name="dateOfBirth"
+      id="dateOfBirth"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      class="form-control"
+    />
+  </div>
+
+  <div class="from-group mt-3">
+    <input
+      type="password"
+      name="password"
+      id="password"
+      placeholder="Password Again"
+      class="form-control"
+    />
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-xs-12">
+      <div class="d-grid gap-2 mx-auto">
+        <button class="btn btn-block btn-primary text-white" type="submit">
+          SignUp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-xs-12 text-center">
+      <p>Already a member? <a [routerLink]="['login']">Login now</a></p>
+    </div>
+  </div>
+</form>

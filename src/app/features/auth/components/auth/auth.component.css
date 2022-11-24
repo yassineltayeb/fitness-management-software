@@ -1,0 +1,50 @@
+.auth-fluid-container {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--primary);
+  background-image: linear-gradient(145deg, var(--primary), var(--dark));
+  display: grid;
+  place-content: center;
+}
+
+.auth-container {
+  width: 20vw;
+  background-color: var(--secondary);
+  padding: 30px;
+  min-height: 50vh;
+  /* display: grid;
+  place-content: center; */
+}
+
+.active {
+  background-color: var(--primary);
+  color: var(--light);
+}
+/*
+.btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active {
+  color: var(--bs-btn-active-color);
+  background: linear-gradient(145deg, #336095, #20436d);
+  border-color: var(--bs-btn-active-border-color);
+} */
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: var(--light) !important;
+  background-color: none !important;
+  background: linear-gradient(145deg, #336095, #20436d);
+  border-color: var(--primary) !important;
+}
+.btn-check + .btn:hover {
+  color: var(--light) !important;
+  background-color: none !important;
+  background: linear-gradient(145deg, #20436d, #336095);
+  border-color: var(--primary) !important;
+}
+
+.btn.btn-outline-primary {
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+}
