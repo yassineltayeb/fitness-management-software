@@ -28,7 +28,10 @@
   </div>
   <div class="row mt-3">
     <div class="col-xs-12 text-center">
-      <p>Not a member? <a [routerLink]="['signup']">Signup now</a></p>
+      <p>
+        Not a member?
+        <a [routerLink]="['signup']" (click)="onSignUp()">Signup now</a>
+      </p>
     </div>
   </div>
 </form>
