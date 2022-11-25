@@ -87,6 +87,10 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm.value);
+    console.log(this.signupForm);
+  }
+
+  get signupFormControls() {
+    return this.signupForm.controls;
   }
 }

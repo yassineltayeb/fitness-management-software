@@ -8,6 +8,11 @@
       class="form-control"
       formControlName="firstName"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['firstName'].errors?.['required'] && signupFormControls['firstName'].touched"
+      >First Name is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -19,6 +24,11 @@
       class="form-control"
       formControlName="lastName"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['lastName'].errors?.['required'] && signupFormControls['lastName'].touched"
+      >Last Name is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -28,6 +38,11 @@
         {{ gender.name }}
       </option>
     </select>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['genderId'].errors?.['required'] && signupFormControls['genderId'].touched"
+      >Gender is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -39,6 +54,17 @@
       class="form-control"
       formControlName="email"
     />
+    <div></div>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['email'].errors?.['required'] && signupFormControls['email'].touched"
+      >Email is required
+    </span>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['email'].errors?.['email'] && signupFormControls['email'].touched"
+      >Invalid Email
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -50,6 +76,11 @@
       class="form-control"
       formControlName="phone"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['phone'].errors?.['required'] && signupFormControls['phone'].touched"
+      >Phone is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -64,6 +95,11 @@
         {{ country.name }}
       </option>
     </select>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['countryId'].errors?.['required'] && signupFormControls['countryId'].touched"
+      >County is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -73,6 +109,11 @@
         {{ city.name }}
       </option>
     </select>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['cityId'].errors?.['required'] && signupFormControls['cityId'].touched"
+      >City is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -83,6 +124,11 @@
       class="form-control"
       formControlName="dateOfBirth"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['dateOfBirth'].errors?.['required'] && signupFormControls['dateOfBirth'].touched"
+      >Date of Birth is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -95,6 +141,11 @@
       class="form-control"
       formControlName="password"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['password'].errors?.['required'] && signupFormControls['password'].touched"
+      >Password is required
+    </span>
   </div>
 
   <div class="from-group mt-3">
@@ -107,6 +158,11 @@
       class="form-control"
       formControlName="password2"
     />
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['password2'].errors?.['required'] && signupFormControls['password2'].touched"
+      >Password is required
+    </span>
   </div>
 
   <div class="row mt-4">
