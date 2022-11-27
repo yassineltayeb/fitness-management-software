@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { CoachSignupRequest } from './../../../coaches/models/coach-signup-request.model';
 import { ToastrService } from 'ngx-toastr';
 import { CityService } from './../../../../shared/services/city.service';
@@ -29,7 +30,8 @@ export class SignupComponent implements OnInit {
     private countryService: CountryService,
     private cityService: CityService,
     private coachService: CoachService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) {
     this.signupForm = new FormGroup({
       firstName: new FormControl(null, Validators.required),
@@ -55,21 +57,37 @@ export class SignupComponent implements OnInit {
   }
 
   getGenders() {
+    this.spinner.show();
     this.genderService.getGenders().subscribe((genders: KeyValuePairs[]) => {
       this.genders = genders;
+      this.spinner.hide();
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Sign Up');
+      this.spinner.hide();
     });
   }
 
   getCountries() {
+    this.spinner.show();
     this.countryService.getCountries().subscribe((countries: KeyValuePairs[]) => {
       this.countries = countries;
-    });
+      this.spinner.hide();
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Sign Up');
+      this.spinner.hide();
+    }
+    );
   }
 
   getCities(countryId: number) {
+    this.spinner.show();
     this.cityService.getCities(countryId).subscribe((cities: KeyValuePairs[]) => {
       this.cities = cities;
-    })
+      this.spinner.hide();
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Sign Up');
+      this.spinner.hide();
+    });
   }
 
   onLogin() {
@@ -82,14 +100,16 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
+    this.spinner.show();
     this.coachService.signUp(this.signupForm.value)?.subscribe((signupResponse: CoachSignupResponse) => {
       this.toastr.success('You signed up successfully', 'Sign Up');
       localStorage.setItem('token', signupResponse.token);
       localStorage.setItem('expiration', signupResponse.expiration.toString());
       this.signupForm.reset();
+      this.spinner.hide();
     }, (error: HttpErrorResponse) => {
       this.toastr.error(error.error.error, 'Sign Up');
-      console.log(error);
+      this.spinner.hide();
     });
   }
 

@@ -88,7 +88,7 @@
       required
       class="form-select"
       formControlName="countryId"
-      (click)="onCountryChange()"
+      (change)="onCountryChange()"
     >
       <option value="" selected disabled hidden>Select County</option>
       <option *ngFor="let country of countries" [value]="country.id">

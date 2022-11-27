@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
-
-import { AppComponent } from './app.component';
-import { AuthModule } from './features/auth/auth.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppComponent } from './app.component';
 
+import { AppRoutingModule } from './app-routing.module';
+import { AuthModule } from './features/auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     AppComponent
@@ -20,8 +20,10 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     AuthModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgxSpinnerModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 })
