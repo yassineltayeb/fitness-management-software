@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service.ts.service';
 
 @Component({
@@ -7,17 +6,21 @@ import { AuthService } from '../../services/auth.service.ts.service';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, AfterViewInit {
   isLoginMode: boolean = true;
   title: string = 'Login';
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.authService.isLoginMode.subscribe((isLoginMode: boolean) => {
       this.isLoginMode = isLoginMode;
       console.log('changed to ', this.isLoginMode);
     });
+  }
+
+  ngAfterViewInit() {
+    this.cd.detectChanges();
   }
 
   onToggleAuthMode(authMode: boolean) {

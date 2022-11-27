@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service.ts.service';
 
 @Component({
@@ -6,15 +6,22 @@ import { AuthService } from '../../services/auth.service.ts.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, AfterViewInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit(): void {
+    this.authService.isLoginMode.next(true);
   }
 
   onSignUp() {
     this.authService.isLoginMode.next(false);
   }
 
+  ngAfterViewInit() {
+    this.cd.detectChanges();
+  }
 }

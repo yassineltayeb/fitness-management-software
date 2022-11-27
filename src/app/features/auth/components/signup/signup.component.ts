@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { CityService } from './../../../../shared/services/city.service';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { GenderService } from 'src/app/shared/services/gender.service';
@@ -23,8 +23,7 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private genderService: GenderService,
     private countryService: CountryService,
-    private cityService: CityService,
-    private router: Router
+    private cityService: CityService
   ) {
     this.signupForm = new FormGroup({
       firstName: new FormControl(null, Validators.required),
@@ -47,9 +46,7 @@ export class SignupComponent implements OnInit {
     this.getCountries();
     this.initSignupForm();
 
-    if (this.router.url.includes('signup')) {
-      this.authService.isLoginMode.next(false);
-    }
+    this.authService.isLoginMode.next(false);
   }
 
   getGenders() {
@@ -97,7 +94,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm);
+    console.log(this.signupForm.valid);
   }
 
   /* --------------------------------- Getters -------------------------------- */
