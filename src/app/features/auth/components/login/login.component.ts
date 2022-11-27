@@ -1,3 +1,4 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service.ts.service';
 
@@ -6,12 +7,17 @@ import { AuthService } from '../../services/auth.service.ts.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
+export class LoginComponent implements OnInit {
+  loginForm: FormGroup;
 
   constructor(
-    private authService: AuthService,
-    private cd: ChangeDetectorRef
-  ) { }
+    private authService: AuthService
+  ) {
+    this.loginForm = new FormGroup({
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required)
+    });
+  }
 
   ngOnInit(): void {
     this.authService.isLoginMode.next(true);
@@ -21,7 +27,12 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this.authService.isLoginMode.next(false);
   }
 
-  ngAfterViewInit() {
-    this.cd.detectChanges();
+  onSubmit() {
+    console.log(this.loginForm.value);
+  }
+
+  /* --------------------------------- Getters -------------------------------- */
+  get loginFormControls() {
+    return this.loginForm.controls;
   }
 }

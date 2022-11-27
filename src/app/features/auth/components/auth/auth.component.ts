@@ -16,6 +16,7 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this.authService.isLoginMode.subscribe((isLoginMode: boolean) => {
       this.isLoginMode = isLoginMode;
       console.log('changed to ', this.isLoginMode);
+      this.isLoginMode ? this.title = 'Login' : this.title = 'Signup';
     });
   }
 
