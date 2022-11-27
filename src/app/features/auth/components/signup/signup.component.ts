@@ -1,14 +1,16 @@
 import { CoachSignupRequest } from './../../../coaches/models/coach-signup-request.model';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { CityService } from './../../../../shared/services/city.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { GenderService } from 'src/app/shared/services/gender.service';
 import { AuthService } from '../../services/auth.service.ts.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/helper/CustomValidators.validators';
+import { CoachService } from 'src/app/features/coaches/services/coach.service';
+import { CoachSignupResponse } from 'src/app/features/coaches/models/coach-signup-response.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -26,6 +28,7 @@ export class SignupComponent implements OnInit {
     private genderService: GenderService,
     private countryService: CountryService,
     private cityService: CityService,
+    private coachService: CoachService,
     private toastr: ToastrService
   ) {
     this.signupForm = new FormGroup({
@@ -97,8 +100,15 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    const signRequest = <CoachSignupRequest>this.signupForm.value;
-    console.log(signRequest);
+    this.coachService.signUp(this.signupForm.value)?.subscribe((signupResponse: CoachSignupResponse) => {
+      this.toastr.success('You signed up successfully', 'Sign Up');
+      localStorage.setItem('token', signupResponse.token);
+      localStorage.setItem('expiration', signupResponse.expiration.toString());
+      this.signupForm.reset();
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Sign Up');
+      console.log(error);
+    });
   }
 
   /* --------------------------------- Getters -------------------------------- */

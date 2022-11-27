@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class CoachesService {
+export class CoachService {
   private baseUrl: string = environment.baseUrl + 'coaches';
 
   constructor(private http: HttpClient) { }
 
   signUp(coachSignup: CoachSignupRequest): Observable<CoachSignupResponse> | null {
-    return this.http.post<CoachSignupResponse>(this.baseUrl, coachSignup);
+    return this.http.post<CoachSignupResponse>(this.baseUrl + '/signup', coachSignup);
   }
 }
