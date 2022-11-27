@@ -1,3 +1,5 @@
+import { CoachSignupRequest } from './../../../coaches/models/coach-signup-request.model';
+import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { CityService } from './../../../../shared/services/city.service';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
@@ -23,7 +25,8 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private genderService: GenderService,
     private countryService: CountryService,
-    private cityService: CityService
+    private cityService: CityService,
+    private toastr: ToastrService
   ) {
     this.signupForm = new FormGroup({
       firstName: new FormControl(null, Validators.required),
@@ -94,7 +97,8 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.signupForm.valid);
+    const signRequest = <CoachSignupRequest>this.signupForm.value;
+    console.log(signRequest);
   }
 
   /* --------------------------------- Getters -------------------------------- */
