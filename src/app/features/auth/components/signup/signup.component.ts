@@ -50,7 +50,6 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.getGenders();
     this.getCountries();
-    this.initSignupForm();
 
     this.authService.isLoginMode.next(false);
   }
@@ -71,23 +70,6 @@ export class SignupComponent implements OnInit {
     this.cityService.getCities(countryId).subscribe((cities: KeyValuePairs[]) => {
       this.cities = cities;
     })
-  }
-
-  initSignupForm() {
-    this.signupForm = new FormGroup({
-      firstName: new FormControl(null, Validators.required),
-      lastName: new FormControl(null, Validators.required),
-      genderId: new FormControl('', Validators.required),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      phone: new FormControl(null, Validators.required),
-      countryId: new FormControl('', Validators.required),
-      cityId: new FormControl('', Validators.required),
-      dateOfBirth: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
-      password2: new FormControl(null, Validators.required)
-    },
-      [CustomValidators.MatchValidator('password', 'password2')]
-    );
   }
 
   onLogin() {
