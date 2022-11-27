@@ -1,10 +1,12 @@
+import { Router } from '@angular/router';
 import { CityService } from './../../../../shared/services/city.service';
 import { Component, OnInit } from '@angular/core';
 import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { GenderService } from 'src/app/shared/services/gender.service';
 import { AuthService } from '../../services/auth.service.ts.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from 'src/app/shared/helper/CustomValidators.validators';
 
 @Component({
   selector: 'app-signup',
@@ -22,26 +24,32 @@ export class SignupComponent implements OnInit {
     private genderService: GenderService,
     private countryService: CountryService,
     private cityService: CityService,
-    private fb: FormBuilder
+    private router: Router
   ) {
-    this.signupForm = this.fb.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      genderId: ['', Validators.required],
-      email: [null, [Validators.required, Validators.email]],
-      phone: [null, Validators.required],
-      countryId: ['', Validators.required],
-      cityId: ['', Validators.required],
-      dateOfBirth: [null, Validators.required],
-      password: [null, Validators.required],
-      password2: [null, Validators.required]
-    });
+    this.signupForm = new FormGroup({
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      genderId: new FormControl('', Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      phone: new FormControl(null, Validators.required),
+      countryId: new FormControl('', Validators.required),
+      cityId: new FormControl('', Validators.required),
+      dateOfBirth: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
+      password2: new FormControl(null, Validators.required)
+    },
+      [CustomValidators.MatchValidator('password', 'password2')]
+    );
   }
 
   ngOnInit(): void {
     this.getGenders();
     this.getCountries();
     this.initSignupForm();
+
+    if (this.router.url.includes('signup')) {
+      this.authService.isLoginMode.next(false);
+    }
   }
 
   getGenders() {
@@ -63,18 +71,20 @@ export class SignupComponent implements OnInit {
   }
 
   initSignupForm() {
-    this.signupForm = this.fb.group({
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-      genderId: ['', Validators.required],
-      email: [null, [Validators.required, Validators.email]],
-      phone: [null, Validators.required],
-      countryId: ['', Validators.required],
-      cityId: ['', Validators.required],
-      dateOfBirth: [null, Validators.required],
-      password: [null, Validators.required],
-      password2: [null, Validators.required]
-    });
+    this.signupForm = new FormGroup({
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      genderId: new FormControl('', Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      phone: new FormControl(null, Validators.required),
+      countryId: new FormControl('', Validators.required),
+      cityId: new FormControl('', Validators.required),
+      dateOfBirth: new FormControl(null, Validators.required),
+      password: new FormControl(null, Validators.required),
+      password2: new FormControl(null, Validators.required)
+    },
+      [CustomValidators.MatchValidator('password', 'password2')]
+    );
   }
 
   onLogin() {
@@ -90,7 +100,15 @@ export class SignupComponent implements OnInit {
     console.log(this.signupForm);
   }
 
+  /* --------------------------------- Getters -------------------------------- */
   get signupFormControls() {
     return this.signupForm.controls;
+  }
+
+  get passwordMatchError() {
+    return (
+      this.signupForm.getError('mismatch') &&
+      this.signupForm.get('password2')?.touched
+    );
   }
 }

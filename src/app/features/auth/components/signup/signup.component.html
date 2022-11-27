@@ -164,11 +164,17 @@
       >Password is required
     </span>
   </div>
-
+  <span class="text-danger" *ngIf="passwordMatchError"
+    >Password does not match</span
+  >
   <div class="row mt-4">
     <div class="col-xs-12">
       <div class="d-grid gap-2 mx-auto">
-        <button class="btn btn-block btn-primary text-white" type="submit">
+        <button
+          class="btn btn-block btn-primary text-white"
+          type="submit"
+          [disabled]="!signupForm.valid"
+        >
           SignUp
         </button>
       </div>
