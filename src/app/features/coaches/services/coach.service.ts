@@ -1,3 +1,5 @@
+import { CoachLoginResponse } from './../models/coach-login-response.model';
+import { CoachLoginRequest } from './../models/coach-login-request.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
@@ -13,7 +15,11 @@ export class CoachService {
 
   constructor(private http: HttpClient) { }
 
-  signUp(coachSignup: CoachSignupRequest): Observable<CoachSignupResponse> | null {
-    return this.http.post<CoachSignupResponse>(this.baseUrl + '/signup', coachSignup);
+  signUp(signupRequest: CoachSignupRequest): Observable<CoachSignupResponse> | null {
+    return this.http.post<CoachSignupResponse>(this.baseUrl + '/signup', signupRequest);
+  }
+
+  login(loginRequest: CoachLoginRequest): Observable<CoachLoginResponse> | null {
+    return this.http.post<CoachLoginResponse>(this.baseUrl + '/login', loginRequest);
   }
 }

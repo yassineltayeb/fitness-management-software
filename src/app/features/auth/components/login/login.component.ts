@@ -1,5 +1,9 @@
+import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { CoachLoginResponse } from './../../../coaches/models/coach-login-response.model';
+import { CoachService } from 'src/app/features/coaches/services/coach.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ChangeDetectorRef, Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service.ts.service';
 
 @Component({
@@ -11,7 +15,9 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private coachService: CoachService,
+    private toastr: ToastrService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
@@ -28,7 +34,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.coachService.login(this.loginForm.value)?.subscribe((loginResponse: CoachLoginResponse) => {
+      this.toastr.success('Logged in successfully', 'Login');
+      localStorage.setItem('token', loginResponse.token);
+      localStorage.setItem('expiration', loginResponse.expiration.toString());
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Login');
+    });
   }
 
   /* --------------------------------- Getters -------------------------------- */
