@@ -84,6 +84,24 @@
   </div>
 
   <div class="from-group mt-3">
+    <ng-multiselect-dropdown
+      [placeholder]="'Select Coach Types'"
+      [settings]="dropdownSettings"
+      [data]="coachTypes"
+      (onSelect)="onItemSelect($event)"
+      (onSelectAll)="onSelectAll($event)"
+      formControlName="coachTypesIds"
+      class="form-control"
+    >
+    </ng-multiselect-dropdown>
+    <span
+      class="text-danger"
+      *ngIf="signupFormControls['coachTypesIds'].errors?.['required'] && signupFormControls['coachTypesIds'].touched"
+      >Coach Type is required
+    </span>
+  </div>
+
+  <div class="from-group mt-3">
     <select
       required
       class="form-select"

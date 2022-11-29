@@ -6,3 +6,9 @@
 .form-select.ng-pristine.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+
+.dropdown-btn {
+  color: #6c757d !important;
+  border: none !important;
+  padding: 0px 15px !important;
+}

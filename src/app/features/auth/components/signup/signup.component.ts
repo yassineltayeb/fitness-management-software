@@ -1,3 +1,4 @@
+import { CoachTypeService } from './../../../coaches/services/coach-type.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CoachSignupRequest } from './../../../coaches/models/coach-signup-request.model';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +13,7 @@ import { CustomValidators } from 'src/app/shared/helper/CustomValidators.validat
 import { CoachService } from 'src/app/features/coaches/services/coach.service';
 import { CoachSignupResponse } from 'src/app/features/coaches/models/coach-signup-response.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +24,9 @@ export class SignupComponent implements OnInit {
   genders: KeyValuePairs[] = [];
   countries: KeyValuePairs[] = [];
   cities: KeyValuePairs[] = [];
+  coachTypes: KeyValuePairs[] = [];
   signupForm: FormGroup;
+  dropdownSettings: IDropdownSettings = {};
 
   constructor(
     private authService: AuthService,
@@ -30,6 +34,7 @@ export class SignupComponent implements OnInit {
     private countryService: CountryService,
     private cityService: CityService,
     private coachService: CoachService,
+    private coachTypeService: CoachTypeService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {
@@ -39,6 +44,7 @@ export class SignupComponent implements OnInit {
       genderId: new FormControl('', Validators.required),
       email: new FormControl(null, [Validators.required, Validators.email]),
       phone: new FormControl(null, Validators.required),
+      coachTypesIds: new FormControl('', Validators.required),
       countryId: new FormControl('', Validators.required),
       cityId: new FormControl('', Validators.required),
       dateOfBirth: new FormControl(null, Validators.required),
@@ -52,7 +58,8 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.getGenders();
     this.getCountries();
-
+    this.getCoachTypes();
+    this.multiSelectDropdownSettings();
     this.authService.isLoginMode.next(false);
   }
 
@@ -90,6 +97,17 @@ export class SignupComponent implements OnInit {
     });
   }
 
+  getCoachTypes() {
+    this.spinner.show();
+    this.coachTypeService.getCoachTypes().subscribe((coachTypes: KeyValuePairs[]) => {
+      this.coachTypes = coachTypes;
+      this.spinner.hide();
+    }, (error: HttpErrorResponse) => {
+      this.toastr.error(error.error.error, 'Sign Up');
+      this.spinner.hide();
+    });
+  }
+
   onLogin() {
     this.authService.isLoginMode.next(true);
   }
@@ -100,8 +118,16 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit() {
+
+    // get selected coach types
+    const selectedCoachTypes = this.signupForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
+      return item.id;
+    });
+
+    var signupRequest = { ...this.signupForm.value, coachTypesIds: selectedCoachTypes };
+
     this.spinner.show();
-    this.coachService.signUp(this.signupForm.value)?.subscribe((signupResponse: CoachSignupResponse) => {
+    this.coachService.signUp(signupRequest)?.subscribe((signupResponse: CoachSignupResponse) => {
       this.toastr.success('You signed up successfully', 'Sign Up');
       localStorage.setItem('token', signupResponse.token);
       localStorage.setItem('expiration', signupResponse.expiration.toString());
@@ -111,6 +137,24 @@ export class SignupComponent implements OnInit {
       this.toastr.error(error.error.error, 'Sign Up');
       this.spinner.hide();
     });
+  }
+
+  onItemSelect(event: any) {
+    // this.selectedCoachTypes = this.signupForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
+    //   return item.id;
+    // });
+    // console.log('selectedCoachTypes', this.selectedCoachTypes);
+    // this.signupForm.controls['coachTypesIds'].setValue(this.selectedCoachTypes);
+    // console.log('coachTypesIds', this.signupForm.get('coachTypesIds')?.value);
+  }
+
+  onSelectAll(event: any) {
+    // this.selectedCoachTypes = this.signupForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
+    //   return item.id;
+    // });;
+    // console.log('selectedCoachTypes', this.selectedCoachTypes);
+    // this.signupForm.controls['coachTypesIds'].setValue(this.selectedCoachTypes)
+    // console.log('coachTypesIds', this.signupForm.get('coachTypesIds')?.value);
   }
 
   /* --------------------------------- Getters -------------------------------- */
@@ -123,5 +167,18 @@ export class SignupComponent implements OnInit {
       this.signupForm.getError('mismatch') &&
       this.signupForm.get('password2')?.touched
     );
+  }
+
+  /* ----------------------------- Configurations ----------------------------- */
+  multiSelectDropdownSettings() {
+    this.dropdownSettings = {
+      singleSelection: false,
+      idField: 'id',
+      textField: 'name',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      allowSearchFilter: true
+    };
   }
 }
