@@ -8,6 +8,10 @@
   --secondary: #dbe2ef; /* gray */
   --light: #f9f7f7; /* white */
   --dark: #112d4e; /* black */
+  --bg-primary: #41444b;
+  --bg-secondary: #52575d;
+  --bg-active: #fddb3a;
+  --cl-text: #f6f4e6;
 }
 
 body {

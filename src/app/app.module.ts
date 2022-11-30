@@ -10,6 +10,7 @@ import { AuthModule } from './features/auth/auth.module';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -19,9 +20,10 @@ import { NgxSpinnerModule } from "ngx-spinner";
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     AuthModule,
-    ReactiveFormsModule,
+    SharedModule,
     NgxSpinnerModule,
     ToastrModule.forRoot()
   ],
