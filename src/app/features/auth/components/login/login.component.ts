@@ -40,8 +40,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this.coachService.login(this.loginForm.value)?.subscribe((loginResponse: CoachLoginResponse) => {
       this.toastr.success('Logged in successfully', 'Login');
-      localStorage.setItem('token', loginResponse.token);
-      localStorage.setItem('expiration', loginResponse.expiration.toString());
+
       this.spinner.hide();
     }, (error: HttpErrorResponse) => {
       this.toastr.error(error.error.error, 'Login');

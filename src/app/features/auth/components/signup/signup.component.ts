@@ -129,8 +129,6 @@ export class SignupComponent implements OnInit {
     this.spinner.show();
     this.coachService.signUp(signupRequest)?.subscribe((signupResponse: CoachSignupResponse) => {
       this.toastr.success('You signed up successfully', 'Sign Up');
-      localStorage.setItem('token', signupResponse.token);
-      localStorage.setItem('expiration', signupResponse.expiration.toString());
       this.signupForm.reset();
       this.spinner.hide();
     }, (error: HttpErrorResponse) => {
