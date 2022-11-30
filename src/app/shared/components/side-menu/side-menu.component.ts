@@ -1,4 +1,6 @@
+import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../../services/common.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
   sidebarToggle: boolean = false;
-  constructor() { }
+  constructor(private commonService: CommonService) { }
 
   ngOnInit() {
 
@@ -15,7 +17,7 @@ export class SideMenuComponent implements OnInit {
 
   toggleSidebar() {
     this.sidebarToggle = !this.sidebarToggle;
-    console.log(this.sidebarToggle);
+    this.commonService.sidebarToggled.next(this.sidebarToggle);
   }
 
 }

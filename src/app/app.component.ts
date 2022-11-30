@@ -1,6 +1,7 @@
 import { AuthService } from './features/auth/services/auth.service.ts.service';
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CommonService } from './shared/services/common.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,16 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AppComponent implements OnInit {
   isLoggedIn: boolean = false;
+  sidebarToggled: boolean = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private commonService: CommonService
+  ) { }
 
   ngOnInit(): void {
     this.getAuthenticationState();
+    this.commonService.sidebarToggled.subscribe(value => this.sidebarToggled = value);
   }
 
   getAuthenticationState(): void {

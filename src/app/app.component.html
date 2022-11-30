@@ -29,7 +29,7 @@
 
     <!-- Body -->
     <div class="contents">
-      <div class="outlet">
+      <div class="outlet" [ngClass]="{ active: sidebarToggled }">
         <router-outlet></router-outlet>
       </div>
 
