@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
 import { CoachSignupRequest } from '../models/coach-signup-request.model';
 import { CoachSignupResponse } from '../models/coach-signup-response.model';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -15,10 +15,6 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 })
 export class CoachService {
   private baseUrl: string = environment.baseUrl + 'coaches';
-  decodedToken: any;
-  isLoggedIn = new BehaviorSubject<boolean>(this.tokenAvailable());
-
-  jwtHelper = new JwtHelperService();
 
   constructor(
     private http: HttpClient,
@@ -43,45 +39,5 @@ export class CoachService {
 
       return loginResponse;
     }));
-  }
-
-  logout(): void {
-    // Clear JWT from localStorage
-    localStorage.removeItem('token');
-    localStorage.removeItem('expiration');
-    // Update logged in status
-    this.setIsLoggedIn(false);
-    // Navigate user back to login page
-    this.router.navigate(['/login']);
-  }
-
-  private tokenAvailable(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  public isAuthenticated(): boolean {
-    const token = localStorage.getItem('token') ?? "";
-    // Check whether the token is expired and return true or false
-    return !this.jwtHelper.isTokenExpired(token);
-  }
-
-  setIsLoggedIn(isLoggedIn: boolean): void {
-    this.isLoggedIn.next(isLoggedIn);
-  }
-
-  getIsLoggedIn(): BehaviorSubject<boolean> {
-    return this.isLoggedIn;
-  }
-
-  getDecodedToken(): any {
-    const token = localStorage.getItem('token') ?? "";
-    return this.jwtHelper.decodeToken(token);
-  }
-
-  getCurrentUser() {
-    if (this.isLoggedIn) {
-      const token = localStorage.getItem('token') ?? "";
-      return this.jwtHelper.decodeToken(token).unique_name;
-    }
   }
 }

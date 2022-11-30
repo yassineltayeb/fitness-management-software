@@ -5,4 +5,36 @@
   </div>
 </div>
 <router-outlet></router-outlet> -->
-<app-side-menu></app-side-menu>
+<!-- <app-side-menu></app-side-menu> -->
+
+<div *ngIf="!isLoggedIn; then login; else layout"></div>
+
+<!-- Login Form -->
+<ng-template #login>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<!-- System Layout -->
+<ng-template #layout>
+  <div class="grid-container">
+    <!-- Header -->
+    <div class="header">
+      <app-header></app-header>
+    </div>
+
+    <!-- Sidenar -->
+    <div class="sidebar">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <!-- Body -->
+    <div class="contents">
+      <div class="outlet">
+        <router-outlet></router-outlet>
+      </div>
+
+      <!-- Footer -->
+      <app-footer></app-footer>
+    </div>
+  </div>
+</ng-template>
