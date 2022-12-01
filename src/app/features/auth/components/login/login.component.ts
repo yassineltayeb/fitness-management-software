@@ -1,11 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { CoachLoginResponse } from './../../../coaches/models/coach-login-response.model';
-import { CoachService } from 'src/app/features/coaches/services/coach.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service.ts.service';
+import { AuthService } from '../../services/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
+import { UserType } from 'src/app/core/enums/user-type.enum';
 
 @Component({
   selector: 'app-login',
@@ -14,21 +13,23 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  userType: UserType = 1;
 
   constructor(
     private authService: AuthService,
-    private coachService: CoachService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, Validators.required)
+      password: new FormControl(null, Validators.required),
+      userType: new FormControl(1, Validators.required)
     });
   }
 
   ngOnInit(): void {
     this.authService.isLoginMode.next(true);
+    this.authService.userType.subscribe((userType) => this.userType = userType);
   }
 
   onSignUp() {
@@ -38,7 +39,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log('show');
     this.spinner.show();
-    this.coachService.login(this.loginForm.value)?.subscribe((loginResponse: CoachLoginResponse) => {
+    this.loginForm.controls['userType'].setValue(this.userType);
+    this.authService.login(this.loginForm.value)?.subscribe(() => {
       this.toastr.success('Logged in successfully', 'Login');
 
       this.spinner.hide();

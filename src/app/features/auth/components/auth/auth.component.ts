@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service.ts.service';
+import { UserType } from 'src/app/core/enums/user-type.enum';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,16 +8,14 @@ import { AuthService } from '../../services/auth.service.ts.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit, AfterViewInit {
-  isLoginMode: boolean = true;
+  userType: UserType = 1;
   title: string = 'Login';
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.authService.isLoginMode.subscribe((isLoginMode: boolean) => {
-      this.isLoginMode = isLoginMode;
-      console.log('changed to ', this.isLoginMode);
-      this.isLoginMode ? this.title = 'Login' : this.title = 'Signup';
+      // this.isLoginMode = isLoginMode;
     });
   }
 
@@ -24,8 +23,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
     this.cd.detectChanges();
   }
 
-  onToggleAuthMode(authMode: boolean) {
-    this.isLoginMode = authMode;
-    this.isLoginMode ? this.title = 'Login' : this.title = 'Signup';
+  onToggleUserType(userType: UserType) {
+    this.userType = userType;
+    this.authService.userType.next(userType);
   }
 }

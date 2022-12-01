@@ -31,13 +31,5 @@ export class CoachService {
     }));
   }
 
-  login(loginRequest: CoachLoginRequest): Observable<CoachLoginResponse> | null {
-    return this.http.post<CoachLoginResponse>(this.baseUrl + '/login', loginRequest).pipe(map((loginResponse: CoachLoginResponse) => {
-      localStorage.setItem('token', loginResponse.token);
-      localStorage.setItem('expiration', loginResponse.expiration.toString());
-      this.router.navigate(['/home']);
 
-      return loginResponse;
-    }));
-  }
 }

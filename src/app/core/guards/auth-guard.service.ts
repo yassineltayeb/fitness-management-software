@@ -1,4 +1,4 @@
-import { AuthService } from './../../features/auth/services/auth.service.ts.service';
+import { AuthService } from '../../features/auth/services/auth.service';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ export class AuthGuardService implements CanActivate {
       this.router.navigate(['auth']);
       return false;
     }
-    
+
     return true;
   }
 

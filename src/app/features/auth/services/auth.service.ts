@@ -1,18 +1,38 @@
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { CoachLoginRequest } from '../../coaches/models/coach-login-request.model';
+import { CoachLoginResponse } from '../../coaches/models/coach-login-response.model';
+import { environment } from 'src/environments/environment';
+import { UserType } from 'src/app/core/enums/user-type.enum';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private baseUrl: string = environment.baseUrl + 'users';
+
   isLoginMode = new Subject<boolean>();
+  userType = new BehaviorSubject<UserType>(UserType.Coach);
   isLoggedIn = new BehaviorSubject<boolean>(this.tokenAvailable());
 
   private jwtHelper = new JwtHelperService();
 
-  constructor(private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router) { }
+
+  login(loginRequest: CoachLoginRequest): Observable<CoachLoginResponse> | null {
+    return this.http.post<CoachLoginResponse>(this.baseUrl + '/login', loginRequest).pipe(map((loginResponse: CoachLoginResponse) => {
+      localStorage.setItem('token', loginResponse.token);
+      localStorage.setItem('expiration', loginResponse.expiration.toString());
+      this.router.navigate(['/home']);
+
+      return loginResponse;
+    }));
+  }
 
   logout(): void {
     // Clear JWT from localStorage
