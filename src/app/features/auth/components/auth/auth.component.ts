@@ -10,12 +10,14 @@ import { AuthService } from '../../services/auth.service';
 export class AuthComponent implements OnInit, AfterViewInit {
   userType: UserType = 1;
   title: string = 'Login';
+  isLoginMode: boolean = true;
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.authService.isLoginMode.subscribe((isLoginMode: boolean) => {
-      // this.isLoginMode = isLoginMode;
+      this.isLoginMode = isLoginMode;
+      this.changeTitle();
     });
   }
 
@@ -26,5 +28,9 @@ export class AuthComponent implements OnInit, AfterViewInit {
   onToggleUserType(userType: UserType) {
     this.userType = userType;
     this.authService.userType.next(userType);
+  }
+
+  changeTitle() {
+    this.isLoginMode ? this.title = 'Login' : this.title = 'SignUp';
   }
 }
