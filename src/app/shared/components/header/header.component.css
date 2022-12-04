@@ -1,0 +1,13 @@
+.app-header {
+  height: 63px;
+  padding-left: 10px;
+  background-color: var(--primary);
+  color: var(--light);
+  position: sticky;
+  top: 0;
+  left: 0;
+}
+
+.app-header--title {
+  padding-left: 60px;
+}

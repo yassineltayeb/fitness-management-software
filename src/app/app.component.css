@@ -29,6 +29,7 @@
   min-height: 100vh;
   padding: 3em;
   padding-top: 6em;
+  background-color: var(--secondary);
 }
 
 .outlet.active {

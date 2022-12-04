@@ -28,6 +28,9 @@ export class AuthService {
     return this.http.post<CoachLoginResponse>(this.baseUrl + '/login', loginRequest).pipe(map((loginResponse: CoachLoginResponse) => {
       localStorage.setItem('token', loginResponse.token);
       localStorage.setItem('expiration', loginResponse.expiration.toString());
+
+      this.setIsLoggedIn(true);
+
       this.router.navigate(['/home']);
 
       return loginResponse;
@@ -41,7 +44,7 @@ export class AuthService {
     // Update logged in status
     this.setIsLoggedIn(false);
     // Navigate user back to login page
-    this.router.navigate(['/login']);
+    this.router.navigate(['/auth']);
   }
 
   private tokenAvailable(): boolean {
@@ -52,6 +55,8 @@ export class AuthService {
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token') ?? "";
     // Check whether the token is expired and return true or false
+    console.log(this.getDecodedToken());
+    console.log(this.getCurrentUser());
     return !this.jwtHelper.isTokenExpired(token);
   }
 
@@ -71,7 +76,7 @@ export class AuthService {
   getCurrentUser() {
     if (this.isLoggedIn) {
       const token = localStorage.getItem('token') ?? "";
-      return this.jwtHelper.decodeToken(token).unique_name;
+      return this.jwtHelper.decodeToken(token)?.fullName;
     }
   }
 }

@@ -23,6 +23,8 @@ export class AppComponent implements OnInit {
   }
 
   getAuthenticationState(): void {
+    console.log('logged in', this.isLoggedIn);
     this.authService.getIsLoggedIn().subscribe(value => this.isLoggedIn = value);
+    console.log('logged in', this.isLoggedIn);
   }
 }
