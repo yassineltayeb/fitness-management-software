@@ -48,15 +48,12 @@ export class AuthService {
   }
 
   private tokenAvailable(): boolean {
-    console.log('get token', localStorage.getItem('token'));
     return !!localStorage.getItem('token');
   }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token') ?? "";
     // Check whether the token is expired and return true or false
-    console.log(this.getDecodedToken());
-    console.log(this.getCurrentUser());
     return !this.jwtHelper.isTokenExpired(token);
   }
 
@@ -77,6 +74,13 @@ export class AuthService {
     if (this.isLoggedIn) {
       const token = localStorage.getItem('token') ?? "";
       return this.jwtHelper.decodeToken(token)?.fullName;
+    }
+  }
+
+  getCurrentUserId() {
+    if (this.isLoggedIn) {
+      const token = localStorage.getItem('token') ?? "";
+      return this.jwtHelper.decodeToken(token)?.id;
     }
   }
 }

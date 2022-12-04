@@ -1,3 +1,4 @@
+import { CoachModule } from './features/coaches/coach.module';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -25,6 +26,7 @@ import { SharedModule } from './shared/shared.module';
     AppRoutingModule,
     AuthModule,
     SharedModule,
+    CoachModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
     JwtModule.forRoot({
@@ -32,7 +34,7 @@ import { SharedModule } from './shared/shared.module';
         tokenGetter: () => {
           return localStorage.getItem("token");
         },
-        allowedDomains: ['https://localhost:5205'],
+        allowedDomains: ['localhost:5205'],
         disallowedRoutes: []
       }
     })

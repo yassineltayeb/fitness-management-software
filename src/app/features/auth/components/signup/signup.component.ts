@@ -25,7 +25,7 @@ export class SignupComponent implements OnInit {
   countries: KeyValuePairs[] = [];
   cities: KeyValuePairs[] = [];
   coachTypes: KeyValuePairs[] = [];
-  signupForm: FormGroup;
+  signupForm = {} as FormGroup;
   dropdownSettings: IDropdownSettings = {};
 
   constructor(
@@ -37,7 +37,18 @@ export class SignupComponent implements OnInit {
     private coachTypeService: CoachTypeService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
-  ) {
+  ) { }
+
+  ngOnInit(): void {
+    this.initForm();
+    this.getGenders();
+    this.getCountries();
+    this.getCoachTypes();
+    this.multiSelectDropdownSettings();
+    this.authService.isLoginMode.next(false);
+  }
+
+  initForm() {
     this.signupForm = new FormGroup({
       firstName: new FormControl(null, Validators.required),
       lastName: new FormControl(null, Validators.required),
@@ -53,14 +64,6 @@ export class SignupComponent implements OnInit {
     },
       [CustomValidators.MatchValidator('password', 'password2')]
     );
-  }
-
-  ngOnInit(): void {
-    this.getGenders();
-    this.getCountries();
-    this.getCoachTypes();
-    this.multiSelectDropdownSettings();
-    this.authService.isLoginMode.next(false);
   }
 
   getGenders() {
@@ -129,30 +132,13 @@ export class SignupComponent implements OnInit {
     this.spinner.show();
     this.coachService.signUp(signupRequest)?.subscribe((signupResponse: CoachSignupResponse) => {
       this.toastr.success('You signed up successfully', 'Sign Up');
+      this.authService.setIsLoggedIn(true);
       this.signupForm.reset();
       this.spinner.hide();
     }, (error: HttpErrorResponse) => {
       this.toastr.error(error.error.error, 'Sign Up');
       this.spinner.hide();
     });
-  }
-
-  onItemSelect(event: any) {
-    // this.selectedCoachTypes = this.signupForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
-    //   return item.id;
-    // });
-    // console.log('selectedCoachTypes', this.selectedCoachTypes);
-    // this.signupForm.controls['coachTypesIds'].setValue(this.selectedCoachTypes);
-    // console.log('coachTypesIds', this.signupForm.get('coachTypesIds')?.value);
-  }
-
-  onSelectAll(event: any) {
-    // this.selectedCoachTypes = this.signupForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
-    //   return item.id;
-    // });;
-    // console.log('selectedCoachTypes', this.selectedCoachTypes);
-    // this.signupForm.controls['coachTypesIds'].setValue(this.selectedCoachTypes)
-    // console.log('coachTypesIds', this.signupForm.get('coachTypesIds')?.value);
   }
 
   /* --------------------------------- Getters -------------------------------- */
