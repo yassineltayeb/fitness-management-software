@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
-import { AuthService } from 'src/app/features/auth/services/auth.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-side-menu',

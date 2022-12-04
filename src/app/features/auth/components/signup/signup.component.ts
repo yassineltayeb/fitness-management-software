@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
 import { CountryService } from 'src/app/shared/services/country.service';
 import { GenderService } from 'src/app/shared/services/gender.service';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/shared/helper/CustomValidators.validators';
 import { CoachService } from 'src/app/features/coaches/services/coach.service';

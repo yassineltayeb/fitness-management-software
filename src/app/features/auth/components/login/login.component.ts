@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../../shared/services/auth.service';
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserType } from 'src/app/core/enums/user-type.enum';
 

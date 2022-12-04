@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, Subject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { CoachLoginRequest } from '../../coaches/models/coach-login-request.model';
-import { CoachLoginResponse } from '../../coaches/models/coach-login-response.model';
+import { CoachLoginRequest } from '../../features/coaches/models/coach-login-request.model';
+import { CoachLoginResponse } from '../../features/coaches/models/coach-login-response.model';
 import { environment } from 'src/environments/environment';
 import { UserType } from 'src/app/core/enums/user-type.enum';
 
