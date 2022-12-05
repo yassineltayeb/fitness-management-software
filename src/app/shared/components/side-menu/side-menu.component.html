@@ -23,10 +23,16 @@
         <span class="title">Main</span>
       </a>
     </li>
-    <li>
+    <li class="profile">
       <a [routerLink]="['coach', currentUser.userId, 'profile']">
         <span class="icon"><i class="fas fa-user"></i></span>
         <span class="title">Profile</span>
+      </a>
+    </li>
+    <li class="signout">
+      <a (click)="onSignOut()">
+        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="title">Sign Out</span>
       </a>
     </li>
     <!-- <li>
@@ -53,11 +59,5 @@
         <span class="title">Password</span>
       </a>
     </li> -->
-    <li>
-      <a (click)="onSignOut()">
-        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-        <span class="title">Sign Out</span>
-      </a>
-    </li>
   </ul>
 </nav>
