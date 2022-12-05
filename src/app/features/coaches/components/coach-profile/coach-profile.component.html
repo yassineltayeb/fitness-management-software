@@ -1,161 +1,175 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <div class="row">
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <input
-            type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="First Name"
-            class="form-control"
-            formControlName="firstName"
-          />
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['firstName'].errors?.['required'] && profileFormControls['firstName'].touched"
-            >First Name is required
-          </span>
+  <div class="card shadow">
+    <h5 class="card-header fw-bold">Profile</h5>
+    <div class="card-body">
+      <div class="row">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="firstName">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                placeholder="First Name"
+                class="form-control"
+                formControlName="firstName"
+              />
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['firstName'].errors?.['required'] && profileFormControls['firstName'].touched"
+                >First Name is required
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="lastName">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                placeholder="Last Name"
+                class="form-control"
+                formControlName="lastName"
+              />
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['lastName'].errors?.['required'] && profileFormControls['lastName'].touched"
+                >Last Name is required
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <input
-            type="text"
-            name="lastName"
-            id="lastName"
-            placeholder="Last Name"
-            class="form-control"
-            formControlName="lastName"
-          />
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['lastName'].errors?.['required'] && profileFormControls['lastName'].touched"
-            >Last Name is required
-          </span>
+
+        <div class="row mt-3">
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="genderId">Gender</label>
+              <select required class="form-select" formControlName="genderId">
+                <option value="" selected disabled hidden>Select Gender</option>
+                <option *ngFor="let gender of genders" [value]="gender.id">
+                  {{ gender.name }}
+                </option>
+              </select>
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['genderId'].errors?.['required'] && profileFormControls['genderId'].touched"
+                >Gender is required
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="phone">Phone</label>
+              <input
+                type="text"
+                name="phone"
+                id="phone"
+                placeholder="+971xxxxxxxxx"
+                class="form-control"
+                formControlName="phone"
+              />
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['phone'].errors?.['required'] && profileFormControls['phone'].touched"
+                >Phone is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="coachTypesIds">Coach Types</label>
+              <ng-multiselect-dropdown
+                [placeholder]="'Select Coach Types'"
+                [settings]="dropdownSettings"
+                [(ngModel)]="selectedCoachType"
+                [data]="coachTypes"
+                formControlName="coachTypesIds"
+                class="form-control"
+              >
+              </ng-multiselect-dropdown>
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['coachTypesIds'].errors?.['required'] && profileFormControls['coachTypesIds'].touched"
+                >Coach Type is required
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="countryId">Country</label>
+              <select
+                required
+                class="form-select"
+                formControlName="countryId"
+                (change)="onCountryChange()"
+              >
+                <option value="" selected disabled hidden>Select County</option>
+                <option *ngFor="let country of countries" [value]="country.id">
+                  {{ country.name }}
+                </option>
+              </select>
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['countryId'].errors?.['required'] && profileFormControls['countryId'].touched"
+                >County is required
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="cityId">City</label>
+              <select required class="form-select" formControlName="cityId">
+                <option value="" selected disabled hidden>Select City</option>
+                <option *ngFor="let city of cities" [value]="city.id">
+                  {{ city.name }}
+                </option>
+              </select>
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['cityId'].errors?.['required'] && profileFormControls['cityId'].touched"
+                >City is required
+              </span>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="from-group">
+              <label class="form-label" for="dateOfBirth">Date of Birth</label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                id="dateOfBirth"
+                class="form-control"
+                formControlName="dateOfBirth"
+              />
+              <span
+                class="text-danger"
+                *ngIf="profileFormControls['dateOfBirth'].errors?.['required'] && profileFormControls['dateOfBirth'].touched"
+                >Date of Birth is required
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <select required class="form-select" formControlName="genderId">
-            <option value="" selected disabled hidden>Select Gender</option>
-            <option *ngFor="let gender of genders" [value]="gender.id">
-              {{ gender.name }}
-            </option>
-          </select>
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['genderId'].errors?.['required'] && profileFormControls['genderId'].touched"
-            >Gender is required
-          </span>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <input
-            type="text"
-            name="phone"
-            id="phone"
-            placeholder="+971xxxxxxxxx"
-            class="form-control"
-            formControlName="phone"
-          />
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['phone'].errors?.['required'] && profileFormControls['phone'].touched"
-            >Phone is required
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <ng-multiselect-dropdown
-            [placeholder]="'Select Coach Types'"
-            [settings]="dropdownSettings"
-            [(ngModel)]="selectedCoachType"
-            [data]="coachTypes"
-            formControlName="coachTypesIds"
-            class="form-control"
+    <div class="card-footer">
+      <div class="row mt-1">
+        <div class="d-flex justify-content-end">
+          <button
+            class="btn btn-block btn-primary text-white"
+            type="submit"
+            [disabled]="!profileForm.valid"
           >
-          </ng-multiselect-dropdown>
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['coachTypesIds'].errors?.['required'] && profileFormControls['coachTypesIds'].touched"
-            >Coach Type is required
-          </span>
+            Update
+          </button>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <select
-            required
-            class="form-select"
-            formControlName="countryId"
-            (change)="onCountryChange()"
-          >
-            <option value="" selected disabled hidden>Select County</option>
-            <option *ngFor="let country of countries" [value]="country.id">
-              {{ country.name }}
-            </option>
-          </select>
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['countryId'].errors?.['required'] && profileFormControls['countryId'].touched"
-            >County is required
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <select required class="form-select" formControlName="cityId">
-            <option value="" selected disabled hidden>Select City</option>
-            <option *ngFor="let city of cities" [value]="city.id">
-              {{ city.name }}
-            </option>
-          </select>
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['cityId'].errors?.['required'] && profileFormControls['cityId'].touched"
-            >City is required
-          </span>
-        </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="from-group mt-3">
-          <input
-            type="date"
-            name="dateOfBirth"
-            id="dateOfBirth"
-            class="form-control"
-            formControlName="dateOfBirth"
-          />
-          <span
-            class="text-danger"
-            *ngIf="profileFormControls['dateOfBirth'].errors?.['required'] && profileFormControls['dateOfBirth'].touched"
-            >Date of Birth is required
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="row mt-4">
-      <div class="d-flex justify-content-end">
-        <button
-          class="btn btn-block btn-primary text-white"
-          type="submit"
-          [disabled]="!profileForm.valid"
-        >
-          Update
-        </button>
       </div>
     </div>
   </div>
