@@ -76,34 +76,42 @@ export class CoachProfileComponent implements OnInit {
   }
 
   getCoach() {
-    this.route.data.subscribe((data: Data) => {
-      this.coach = data['coach'];
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Coach Profile');
+    this.route.data.subscribe({
+      next: (data: Data) => {
+        this.coach = data['coach'];
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Coach Profile');
+      }
     });
   }
 
   getGenders() {
     this.spinner.show();
-    this.genderService.getGenders().subscribe((genders: KeyValuePairs[]) => {
-      this.genders = genders;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.genderService.getGenders().subscribe({
+      next: (genders: KeyValuePairs[]) => {
+        this.genders = genders;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 
   getCountries() {
     this.spinner.show();
-    this.countryService.getCountries().subscribe((countries: KeyValuePairs[]) => {
-      this.countries = countries;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
-    }
-    );
+    this.countryService.getCountries().subscribe({
+      next: (countries: KeyValuePairs[]) => {
+        this.countries = countries;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
+    });
   }
 
   onCountryChange() {
@@ -113,12 +121,15 @@ export class CoachProfileComponent implements OnInit {
 
   getCities(countryId: number) {
     this.spinner.show();
-    this.cityService.getCities(countryId).subscribe((cities: KeyValuePairs[]) => {
-      this.cities = cities;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.cityService.getCities(countryId).subscribe({
+      next: (cities: KeyValuePairs[]) => {
+        this.cities = cities;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 
@@ -135,7 +146,6 @@ export class CoachProfileComponent implements OnInit {
   }
 
   onSubmit() {
-
     // get selected coach types
     const selectedCoachTypes = this.profileForm.controls['coachTypesIds'].value.map((item: KeyValuePairs) => {
       return item.id;
@@ -144,12 +154,15 @@ export class CoachProfileComponent implements OnInit {
     var profileRequest = { ...this.profileForm.value, coachTypesIds: selectedCoachTypes };
 
     this.spinner.show();
-    this.coachService.updateCoach(this.coach.id, profileRequest)?.subscribe((profileResponse: CoachProfileResponse) => {
-      this.toastr.success('Profile updated successfully', 'Profile');
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Profile');
-      this.spinner.hide();
+    this.coachService.updateCoach(this.coach.id, profileRequest)?.subscribe({
+      next: (profileResponse: CoachProfileResponse) => {
+        this.toastr.success('Profile updated successfully', 'Profile');
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Profile');
+        this.spinner.hide();
+      }
     });
   }
 

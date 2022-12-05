@@ -68,46 +68,57 @@ export class SignupComponent implements OnInit {
 
   getGenders() {
     this.spinner.show();
-    this.genderService.getGenders().subscribe((genders: KeyValuePairs[]) => {
-      this.genders = genders;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.genderService.getGenders().subscribe({
+      next: (genders: KeyValuePairs[]) => {
+        this.genders = genders;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 
   getCountries() {
     this.spinner.show();
-    this.countryService.getCountries().subscribe((countries: KeyValuePairs[]) => {
-      this.countries = countries;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
-    }
-    );
+    this.countryService.getCountries().subscribe({
+      next: (countries: KeyValuePairs[]) => {
+        this.countries = countries;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
+    });
   }
 
   getCities(countryId: number) {
     this.spinner.show();
-    this.cityService.getCities(countryId).subscribe((cities: KeyValuePairs[]) => {
-      this.cities = cities;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.cityService.getCities(countryId).subscribe({
+      next: (cities: KeyValuePairs[]) => {
+        this.cities = cities;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 
   getCoachTypes() {
     this.spinner.show();
-    this.coachTypeService.getCoachTypes().subscribe((coachTypes: KeyValuePairs[]) => {
-      this.coachTypes = coachTypes;
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.coachTypeService.getCoachTypes().subscribe({
+      next: (coachTypes: KeyValuePairs[]) => {
+        this.coachTypes = coachTypes;
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 
@@ -130,14 +141,17 @@ export class SignupComponent implements OnInit {
     var signupRequest = { ...this.signupForm.value, coachTypesIds: selectedCoachTypes };
 
     this.spinner.show();
-    this.coachService.signUp(signupRequest)?.subscribe((signupResponse: CoachSignupResponse) => {
-      this.toastr.success('You signed up successfully', 'Sign Up');
-      this.authService.setIsLoggedIn(true);
-      this.signupForm.reset();
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Sign Up');
-      this.spinner.hide();
+    this.coachService.signUp(signupRequest)?.subscribe({
+      next: (signupResponse: CoachSignupResponse) => {
+        this.toastr.success('You signed up successfully', 'Sign Up');
+        this.authService.setIsLoggedIn(true);
+        this.signupForm.reset();
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
+      }
     });
   }
 

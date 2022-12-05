@@ -40,13 +40,16 @@ export class LoginComponent implements OnInit {
     console.log('show');
     this.spinner.show();
     this.loginForm.controls['userType'].setValue(this.userType);
-    this.authService.login(this.loginForm.value)?.subscribe(() => {
-      this.toastr.success('Logged in successfully', 'Login');
 
-      this.spinner.hide();
-    }, (error: HttpErrorResponse) => {
-      this.toastr.error(error.error.error, 'Login');
-      this.spinner.hide();
+    this.authService.login(this.loginForm.value)?.subscribe({
+      next: () => {
+        this.toastr.success('Logged in successfully', 'Login');
+        this.spinner.hide();
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toastr.error(error.error.error, 'Login');
+        this.spinner.hide();
+      }
     });
   }
 
