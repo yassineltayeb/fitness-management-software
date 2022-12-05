@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../services/common.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from '../../models/user.model';
+import { faHome, faUser, faSignOut, faPersonRunning, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-side-menu',
@@ -12,6 +13,11 @@ import { User } from '../../models/user.model';
 export class SideMenuComponent implements OnInit {
   sidebarToggle: boolean = false;
   currentUser = {} as User;
+  faPersonRunning = faPersonRunning
+  faHome = faHome
+  faUser = faUser
+  faSignOut = faSignOut
+  faBars = faBars
 
   constructor(
     private commonService: CommonService,

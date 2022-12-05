@@ -1,10 +1,10 @@
 <header>
   <div class="toggle">
-    <i class="fas fa-bars"></i>
+    <fa-icon [icon]="faBars"></fa-icon>
   </div>
   <h3>Dashboard</h3>
   <a href="#">
-    <i class="fas fa-sign-out-alt"></i>
+    <fa-icon [icon]="faSignOut"></fa-icon>
   </a>
 </header>
 <nav [ngClass]="{ active: sidebarToggle }">
@@ -12,58 +12,34 @@
     <li>
       <a class="toggle">
         <span class="icon" (click)="toggleSidebar()"
-          ><i class="fas fa-bars"></i
+          ><fa-icon [icon]="faBars"></fa-icon
         ></span>
         <span class="title">Menu</span>
       </a>
     </li>
     <li>
       <a>
-        <span class="icon"><i class="fas fa-home"></i></span>
+        <span class="icon"><fa-icon [icon]="faHome"></fa-icon></span>
         <span class="title">Main</span>
       </a>
     </li>
     <li>
       <a [routerLink]="['coach', currentUser.userId, 'classes']">
-        <span class="icon"><i class="fas fa-users"></i></span>
+        <span class="icon"><fa-icon [icon]="faPersonRunning"></fa-icon></span>
         <span class="title">Classes</span>
       </a>
     </li>
     <li class="profile">
       <a [routerLink]="['coach', currentUser.userId, 'profile']">
-        <span class="icon"><i class="fas fa-user"></i></span>
+        <span class="icon"><fa-icon [icon]="faUser"></fa-icon></span>
         <span class="title">Profile</span>
       </a>
     </li>
     <li class="signout">
       <a (click)="onSignOut()">
-        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="icon"><fa-icon [icon]="faSignOut"></fa-icon></span>
         <span class="title">Sign Out</span>
       </a>
     </li>
-    <!-- <li>
-      <a href="#">
-        <span class="icon"><i class="fas fa-envelope"></i></span>
-        <span class="title">Messages</span>
-      </a>
-    </li> -->
-    <!-- <li>
-      <a href="#">
-        <span class="icon"><i class="fas fa-info"></i></span>
-        <span class="title">Help</span>
-      </a>
-    </li> -->
-    <!-- <li>
-      <a href="#">
-        <span class="icon"><i class="fas fa-cog"></i></span>
-        <span class="title">Setting</span>
-      </a>
-    </li> -->
-    <!-- <li>
-      <a href="#">
-        <span class="icon"><i class="fas fa-lock"></i></span>
-        <span class="title">Password</span>
-      </a>
-    </li> -->
   </ul>
 </nav>
