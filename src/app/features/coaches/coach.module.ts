@@ -1,3 +1,4 @@
+import { CoachesClassesComponent } from './../coaches-classes/coaches-classes.component';
 import { CoachProfileComponent } from './components/coach-profile/coach-profile.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +8,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 
 @NgModule({
   declarations: [
-    CoachProfileComponent
+    CoachProfileComponent,
+    CoachesClassesComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     NgMultiSelectDropDownModule.forRoot()
   ],
   exports: [
-    CoachProfileComponent
+    CoachProfileComponent,
+    CoachesClassesComponent
   ]
 })
 export class CoachModule { }

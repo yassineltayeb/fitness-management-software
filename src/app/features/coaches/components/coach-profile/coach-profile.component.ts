@@ -60,7 +60,7 @@ export class CoachProfileComponent implements OnInit {
       dateOfBirth: new FormControl(formatDate(this.coach.dateOfBirth, 'yyyy-MM-dd', 'en'), Validators.required),
     }
     );
-    console.log('date', formatDate(this.coach.dateOfBirth, 'MM/dd/yyyy', 'en'));
+
     // populate cities
     this.getCities(this.coach.countryId);
     this.profileForm.addControl('cityId', new FormControl(this.coach.cityId, Validators.required));
