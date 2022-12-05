@@ -7,6 +7,7 @@ import { CoachLoginRequest } from '../../features/coaches/models/coach-login-req
 import { CoachLoginResponse } from '../../features/coaches/models/coach-login-response.model';
 import { environment } from 'src/environments/environment';
 import { UserType } from 'src/app/core/enums/user-type.enum';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -70,17 +71,10 @@ export class AuthService {
     return this.jwtHelper.decodeToken(token);
   }
 
-  getCurrentUser() {
-    if (this.isLoggedIn) {
-      const token = localStorage.getItem('token') ?? "";
-      return this.jwtHelper.decodeToken(token)?.fullName;
-    }
-  }
-
-  getCurrentUserId() {
-    if (this.isLoggedIn) {
-      const token = localStorage.getItem('token') ?? "";
-      return this.jwtHelper.decodeToken(token)?.id;
-    }
+  getCurrentUser(): User {
+    // if (this.isLoggedIn) {
+    const token = localStorage.getItem('token') ?? "";
+    return this.jwtHelper.decodeToken<User>(token);
+    // }
   }
 }
