@@ -26,9 +26,8 @@
   <div class="card-body">
     <app-coaches-classes-list
       [coachClasses]="coachClasses.data"
+      [pagination]="pagination"
+      (currentPagination)="onPageChange($event)"
     ></app-coaches-classes-list>
-  </div>
-  <div class="card-footer">
-    <nav aria-label="Page navigation example"></nav>
   </div>
 </div>

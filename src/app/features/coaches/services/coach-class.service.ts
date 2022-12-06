@@ -18,8 +18,12 @@ export class CoachClassService {
     let queryParams = new HttpParams();
 
     queryParams = queryParams.append('searchTerm', searchTerm);
-    queryParams = queryParams.append('pageNumber', pageNumber);
-    queryParams = queryParams.append('pageSize', pageSize);
+    if (pageNumber) {
+      queryParams = queryParams.append('pageNumber', pageNumber)
+    };
+    if (pageSize) {
+      queryParams = queryParams.append('pageSize', pageSize);
+    }
 
     return this.http.get<PagedResult<CoachClassResponse>>(this.baseUrl, {
       params: queryParams

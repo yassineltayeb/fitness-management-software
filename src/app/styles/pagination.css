@@ -1,0 +1,29 @@
+.ngx-pagination ul {
+  display: list-item;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  color: #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.ngx-pagination li {
+  display: list-item;
+  border: 1px solid #dee2e6;
+  background-color: #fff;
+  color: #dee2e6;
+  border-radius: 0.375rem;
+}
+
+.ngx-pagination a {
+  text-decoration: none;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  background: var(--secondary) !important;
+  color: black;
+}
+
+.ngx-pagination .current {
+  background: var(--primary) !important;
+}

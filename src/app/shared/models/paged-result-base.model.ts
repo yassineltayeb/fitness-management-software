@@ -1,6 +1,6 @@
 export interface PagedResultBase {
   currentPage: number;
   pageCount: number;
-  pageSize: number;
-  rowCount: number;
+  itemsPerPage: number;
+  totalItems: number;
 }

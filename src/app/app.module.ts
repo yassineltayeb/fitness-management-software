@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JwtModule } from "@auth0/angular-jwt";
 import { AppComponent } from './app.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
@@ -23,6 +24,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
     AppRoutingModule,
     AuthModule,
     SharedModule,
