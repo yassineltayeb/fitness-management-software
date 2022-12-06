@@ -91,10 +91,11 @@ export class CoachProfileComponent implements OnInit {
     this.genderService.getGenders().subscribe({
       next: (genders: KeyValuePairs[]) => {
         this.genders = genders;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -105,10 +106,11 @@ export class CoachProfileComponent implements OnInit {
     this.countryService.getCountries().subscribe({
       next: (countries: KeyValuePairs[]) => {
         this.countries = countries;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -124,10 +126,11 @@ export class CoachProfileComponent implements OnInit {
     this.cityService.getCities(countryId).subscribe({
       next: (cities: KeyValuePairs[]) => {
         this.cities = cities;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -157,10 +160,11 @@ export class CoachProfileComponent implements OnInit {
     this.coachService.updateCoach(this.coach.id, profileRequest)?.subscribe({
       next: (profileResponse: CoachProfileResponse) => {
         this.toastr.success('Profile updated successfully', 'Profile');
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Profile');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });

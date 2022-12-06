@@ -44,10 +44,11 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value)?.subscribe({
       next: () => {
         this.toastr.success('Logged in successfully', 'Login');
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Login');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });

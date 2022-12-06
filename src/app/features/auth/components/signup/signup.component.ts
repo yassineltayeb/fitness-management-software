@@ -71,10 +71,11 @@ export class SignupComponent implements OnInit {
     this.genderService.getGenders().subscribe({
       next: (genders: KeyValuePairs[]) => {
         this.genders = genders;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -99,10 +100,11 @@ export class SignupComponent implements OnInit {
     this.cityService.getCities(countryId).subscribe({
       next: (cities: KeyValuePairs[]) => {
         this.cities = cities;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -113,10 +115,11 @@ export class SignupComponent implements OnInit {
     this.coachTypeService.getCoachTypes().subscribe({
       next: (coachTypes: KeyValuePairs[]) => {
         this.coachTypes = coachTypes;
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
@@ -146,10 +149,11 @@ export class SignupComponent implements OnInit {
         this.toastr.success('You signed up successfully', 'Sign Up');
         this.authService.setIsLoggedIn(true);
         this.signupForm.reset();
-        this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+      },
+      complete: () => {
         this.spinner.hide();
       }
     });
