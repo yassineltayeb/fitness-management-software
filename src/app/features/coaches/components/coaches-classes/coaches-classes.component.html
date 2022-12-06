@@ -1,3 +1,34 @@
-<p>
-  coaches-classes works!
-</p>
+<div class="card shadow">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <h5 class="fw-bold m-0 p-0">My Classes</h5>
+      <button class="btn btn-primary">Add New Class</button>
+    </div>
+  </div>
+  <div class="card-body">
+    <form>
+      <div class="form-group">
+        <input
+          type="text"
+          name="searchTerm"
+          id="searchTerm"
+          class="form-control"
+        />
+      </div>
+    </form>
+  </div>
+  <div class="card-footer d-flex justify-content-end">
+    <button class="btn btn-primary">Apply Filter</button>
+  </div>
+</div>
+<div class="card shadow mt-3">
+  <div class="card-header">header</div>
+  <div class="card-body">
+    <app-coaches-classes-list
+      [coachClasses]="coachClasses.data"
+    ></app-coaches-classes-list>
+  </div>
+  <div class="card-footer">
+    <nav aria-label="Page navigation example"></nav>
+  </div>
+</div>

@@ -3,6 +3,7 @@
 @import url("app/styles/button.css");
 @import url("app/styles/inputs.css");
 @import url("app/styles/selects.css");
+@import url("app/styles/table.css");
 :root {
   --primary: #3f72af; /* blue */
   --secondary: #dbe2ef; /* gray */

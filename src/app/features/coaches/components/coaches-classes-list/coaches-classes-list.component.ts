@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { CoachClassResponse } from './../../models/coach-class-response.model';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-coaches-classes-list',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coaches-classes-list.component.css']
 })
 export class CoachesClassesListComponent implements OnInit {
+  @Input() coachClasses: CoachClassResponse[] = [];
 
   constructor() { }
 
   ngOnInit() {
+    console.log('coachClasses', this.coachClasses);
   }
 
 }

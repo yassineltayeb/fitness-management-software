@@ -30,6 +30,7 @@ export class CoachesClassesComponent implements OnInit {
     this.coachClassService.getCoachesClasses('', 1, 50).subscribe({
       next: (coachClasses: PagedResult<CoachClassResponse>) => {
         this.coachClasses = coachClasses;
+        console.log(this.coachClasses);
       },
       error: (error: HttpErrorResponse) => {
         this.toaster.error(error.error.error);
