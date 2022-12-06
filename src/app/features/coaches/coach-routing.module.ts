@@ -1,4 +1,4 @@
-import { CoachesClassesComponent } from './../coaches-classes/coaches-classes.component';
+import { CoachesClassesComponent } from './components/coaches-classes/coaches-classes.component';
 import { CoachProfileComponent } from './components/coach-profile/coach-profile.component';
 import { Route, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';

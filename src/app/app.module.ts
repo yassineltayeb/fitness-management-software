@@ -34,7 +34,7 @@ import { SharedModule } from './shared/shared.module';
         tokenGetter: () => {
           return localStorage.getItem("token");
         },
-        allowedDomains: ['localhost:5205'],
+        allowedDomains: ['localhost:5205', 'localhost:44331'],
         disallowedRoutes: []
       }
     })
