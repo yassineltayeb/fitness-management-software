@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CoachesClassesListComponent } from './components/coaches-classes-list/coaches-classes-list.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CoachesClassesListComponent } from './components/coaches-classes-list/c
     CoachRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot()
   ],

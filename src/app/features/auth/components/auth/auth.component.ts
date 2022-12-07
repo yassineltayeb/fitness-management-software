@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { UserType } from 'src/app/core/enums/user-type.enum';
 import { AuthService } from '../../../../shared/services/auth.service';
+import { faUser, faUserGraduate } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-auth',
@@ -11,6 +12,8 @@ export class AuthComponent implements OnInit, AfterViewInit {
   userType: UserType = 1;
   title: string = 'Login';
   isLoginMode: boolean = true;
+  faUser = faUser;
+  faUserGraduate = faUserGraduate;
 
   constructor(private authService: AuthService, private cd: ChangeDetectorRef) { }
 

@@ -25,7 +25,7 @@
                   [checked]="userType == 1"
                 />
                 <label class="btn btn-outline-primary" for="login"
-                  ><span class="icon"> <i class="fas fa-user"></i></span>
+                  ><fa-icon [icon]="faUser" size="6x"></fa-icon>
                   <p>Coach</p></label
                 >
               </div>
@@ -41,9 +41,7 @@
                   [checked]="userType == 2"
                 />
                 <label class="btn btn-outline-primary" for="signup"
-                  ><span class="icon"
-                    ><i class="fas fa-user-graduate"></i>
-                  </span>
+                  ><fa-icon [icon]="faUserGraduate" size="6x"></fa-icon>
                   <p>Member</p></label
                 >
               </div>
