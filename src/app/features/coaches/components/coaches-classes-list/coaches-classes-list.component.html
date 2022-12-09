@@ -7,8 +7,8 @@
         <th>Title</th>
         <th>Description</th>
         <th>Location</th>
-        <th>Duration</th>
         <th>Date</th>
+        <th>Duration</th>
         <th>Available Spaces</th>
       </tr>
     </thead>
@@ -17,8 +17,8 @@
         <td>{{ coachClass.title }}</td>
         <td>{{ coachClass.description }}</td>
         <td>{{ coachClass.location }}</td>
+        <td>{{ coachClass.classDate | date : "dd-MMM-yyyy HH:mm" }}</td>
         <td>{{ coachClass.duration }}</td>
-        <td>{{ coachClass.classDate | date }}</td>
         <td>{{ coachClass.availableSpaces }}</td>
       </tr>
     </tbody>
