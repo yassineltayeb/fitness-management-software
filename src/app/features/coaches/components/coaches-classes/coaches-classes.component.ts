@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { PagedResult } from 'src/app/shared/models/paged-result.model';
 import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { Pagination } from 'src/app/shared/models/pagination.model';
+import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
+import { ViewMode } from 'src/app/core/enums/view-mode.enum';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -15,6 +17,10 @@ import { Pagination } from 'src/app/shared/models/pagination.model';
 export class CoachesClassesComponent implements OnInit {
   coachClasses = {} as PagedResult<CoachClassResponse>;
   public pagination = {} as Pagination;
+  searchTerm: string = "";
+  viewMode: ViewMode = 1;
+  faList = faList;
+  faGrip = faGrip;
 
   constructor(
     private coachClassService: CoachClassService,
@@ -28,7 +34,7 @@ export class CoachesClassesComponent implements OnInit {
   getCoachClasses() {
     this.spinner.show();
 
-    this.coachClassService.getCoachesClasses('', this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
+    this.coachClassService.getCoachesClasses(this.searchTerm, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
       next: (coachClasses: PagedResult<CoachClassResponse>) => {
         this.coachClasses = coachClasses;
         this.pagination.itemsPerPage = coachClasses.itemsPerPage;
@@ -38,6 +44,7 @@ export class CoachesClassesComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toaster.error(error.error.error);
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -45,9 +52,13 @@ export class CoachesClassesComponent implements OnInit {
     });
   }
 
+  /* --------------------------------- Events --------------------------------- */
   onPageChange(pagination: Pagination) {
     this.pagination = pagination;
-    console.log('on change', this.pagination);
     this.getCoachClasses();
+  }
+
+  onViewModeChange(viewMode: number) {
+    this.viewMode = viewMode;
   }
 }

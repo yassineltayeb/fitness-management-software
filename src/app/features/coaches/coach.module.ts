@@ -1,3 +1,4 @@
+import { CoachesClassesGridComponent } from './components/coaches-classes-grid/coaches-classes-grid.component';
 import { CoachesClassesComponent } from './components/coaches-classes/coaches-classes.component';
 import { CoachProfileComponent } from './components/coach-profile/coach-profile.component';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   declarations: [
     CoachProfileComponent,
     CoachesClassesComponent,
-    CoachesClassesListComponent
+    CoachesClassesListComponent,
+    CoachesClassesGridComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   exports: [
     CoachProfileComponent,
     CoachesClassesComponent,
-    CoachesClassesListComponent
+    CoachesClassesListComponent,
+    CoachesClassesGridComponent
   ]
 })
 export class CoachModule { }

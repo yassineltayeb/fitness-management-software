@@ -1,0 +1,31 @@
+.active {
+  background-color: var(--primary);
+  color: var(--light);
+}
+
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
+  color: var(--light) !important;
+  background-color: none !important;
+  background: linear-gradient(145deg, #336095, #20436d);
+  border-color: var(--primary) !important;
+}
+
+.btn-check + .btn:hover {
+  color: var(--light) !important;
+  background-color: none !important;
+  background: linear-gradient(145deg, #20436d, #336095);
+  border-color: var(--primary) !important;
+}
+
+.btn.btn-outline-primary {
+  color: var(--primary) !important;
+  border: 2px solid var(--primary) !important;
+}
+
+.icon {
+  font-size: 50px;
+}

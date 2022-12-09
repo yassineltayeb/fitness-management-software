@@ -1,25 +1,29 @@
-<table class="table table-striped table-hover table-bordered">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Location</th>
-      <th>Duration</th>
-      <th>Date</th>
-      <th>Available Spaces</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let coachClass of coachClasses | paginate : pagination">
-      <td>{{ coachClass.title }}</td>
-      <td>{{ coachClass.description }}</td>
-      <td>{{ coachClass.location }}</td>
-      <td>{{ coachClass.duration }}</td>
-      <td>{{ coachClass.classDate | date }}</td>
-      <td>{{ coachClass.availableSpaces }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="coaches-list--table">
+  <table
+    class="table table-striped table-hover table-bordered table-responsive"
+  >
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Location</th>
+        <th>Duration</th>
+        <th>Date</th>
+        <th>Available Spaces</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let coachClass of coachClasses | paginate : pagination">
+        <td>{{ coachClass.title }}</td>
+        <td>{{ coachClass.description }}</td>
+        <td>{{ coachClass.location }}</td>
+        <td>{{ coachClass.duration }}</td>
+        <td>{{ coachClass.classDate | date }}</td>
+        <td>{{ coachClass.availableSpaces }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 <div class="row">
   <div class="d-flex justify-content-end align-items-center">
     <div class="p-2">

@@ -1,4 +1,3 @@
-import { SideMenuComponent } from './../../shared/components/side-menu/side-menu.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AuthRoutingModule } from './auth-routing.module';
 import { NgModule } from '@angular/core';

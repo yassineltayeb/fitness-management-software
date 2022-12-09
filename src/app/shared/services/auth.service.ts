@@ -17,13 +17,14 @@ export class AuthService {
 
   isLoginMode = new Subject<boolean>();
   userType = new BehaviorSubject<UserType>(UserType.Coach);
-  isLoggedIn = new BehaviorSubject<boolean>(this.tokenAvailable());
+  isLoggedIn = new BehaviorSubject<boolean>(this.isAuthenticated());
 
-  private jwtHelper = new JwtHelperService();
+  // private jwtHelper = new JwtHelperService();
 
   constructor(
     private http: HttpClient,
-    private router: Router) { }
+    private router: Router,
+    private jwtHelper: JwtHelperService) { }
 
   login(loginRequest: CoachLoginRequest): Observable<CoachLoginResponse> | null {
     return this.http.post<CoachLoginResponse>(this.baseUrl + '/login', loginRequest).pipe(map((loginResponse: CoachLoginResponse) => {
@@ -48,9 +49,10 @@ export class AuthService {
     this.router.navigate(['/auth']);
   }
 
-  private tokenAvailable(): boolean {
-    return !!localStorage.getItem('token');
-  }
+  // private tokenAvailable(): boolean {
+  //   const token = localStorage.getItem('token') ?? "";
+  //   return !this.jwtHelper.isTokenExpired(token);
+  // }
 
   public isAuthenticated(): boolean {
     const token = localStorage.getItem('token') ?? "";

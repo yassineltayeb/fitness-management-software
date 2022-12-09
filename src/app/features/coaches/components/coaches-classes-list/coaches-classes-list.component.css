@@ -1,0 +1,32 @@
+.coaches-list--table {
+  max-height: 50vh;
+  overflow: scroll;
+  text-align: justify;
+}
+
+/* thead tr {
+  position: sticky;
+  top: 0;
+  height: 50px;
+  background: white;
+  z-index: 1;
+} */
+
+/*** start overflow Scroll ***/
+/* .overflowScroll {
+  height: auto;
+  overflow: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #eef0f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b3b0b0;
+} */
+/*** End overflow Scroll ***/

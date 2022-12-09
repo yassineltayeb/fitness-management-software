@@ -74,6 +74,7 @@ export class SignupComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -103,6 +104,7 @@ export class SignupComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -118,6 +120,7 @@ export class SignupComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -152,6 +155,7 @@ export class SignupComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();

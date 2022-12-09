@@ -94,6 +94,7 @@ export class CoachProfileComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -109,6 +110,7 @@ export class CoachProfileComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -129,6 +131,7 @@ export class CoachProfileComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Sign Up');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();
@@ -163,6 +166,7 @@ export class CoachProfileComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         this.toastr.error(error.error.error, 'Profile');
+        this.spinner.hide();
       },
       complete: () => {
         this.spinner.hide();

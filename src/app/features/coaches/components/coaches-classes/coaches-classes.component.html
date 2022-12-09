@@ -13,21 +13,71 @@
           name="searchTerm"
           id="searchTerm"
           class="form-control"
+          placeholder="Search Term"
+          [(ngModel)]="searchTerm"
         />
       </div>
     </form>
   </div>
   <div class="card-footer d-flex justify-content-end">
-    <button class="btn btn-primary">Apply Filter</button>
+    <button class="btn btn-primary" (click)="getCoachClasses()">
+      Apply Filter
+    </button>
   </div>
 </div>
 <div class="card shadow mt-3">
-  <div class="card-header">header</div>
+  <div class="card-header">
+    <div
+      class="btn-group d-flex justify-content-end"
+      role="group"
+      aria-label="Basic radio toggle button group"
+    >
+      <div class="p-0 m-0">
+        <input
+          type="radio"
+          class="btn-check"
+          name="auth"
+          id="login"
+          autocomplete="off"
+          [checked]="viewMode == 1"
+        />
+        <label
+          (click)="onViewModeChange(1)"
+          class="btn btn-outline-primary"
+          for="login"
+          ><fa-icon [icon]="faList" size="lg"></fa-icon
+        ></label>
+      </div>
+
+      <div class="user-type">
+        <input
+          type="radio"
+          class="btn-check"
+          name="auth"
+          id="signup"
+          autocomplete="off"
+          [checked]="viewMode == 2"
+        />
+        <label
+          (click)="onViewModeChange(2)"
+          class="btn btn-outline-primary"
+          for="signup"
+          ><fa-icon [icon]="faGrip" size="lg"></fa-icon
+        ></label>
+      </div>
+    </div>
+  </div>
   <div class="card-body">
-    <app-coaches-classes-list
-      [coachClasses]="coachClasses.data"
-      [pagination]="pagination"
-      (currentPagination)="onPageChange($event)"
-    ></app-coaches-classes-list>
+    <div *ngIf="viewMode == 1; then listView; else gridView"></div>
+    <ng-template #listView>
+      <app-coaches-classes-list
+        [coachClasses]="coachClasses.data"
+        [pagination]="pagination"
+        (currentPagination)="onPageChange($event)"
+      ></app-coaches-classes-list>
+    </ng-template>
+    <ng-template #gridView>
+      <app-coaches-classes-grid></app-coaches-classes-grid>
+    </ng-template>
   </div>
 </div>
