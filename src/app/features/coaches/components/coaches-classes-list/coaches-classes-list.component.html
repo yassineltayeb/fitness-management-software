@@ -10,6 +10,7 @@
         <th>Date</th>
         <th>Duration</th>
         <th>Available Spaces</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +21,14 @@
         <td>{{ coachClass.classDate | date : "dd-MMM-yyyy HH:mm" }}</td>
         <td>{{ coachClass.duration }}</td>
         <td>{{ coachClass.availableSpaces }}</td>
+        <td class="d-flex justify-content-center">
+          <button class="btn btn-warning me-3">
+            <fa-icon [icon]="faEdit" size="xs"></fa-icon>
+          </button>
+          <button class="btn btn-danger">
+            <fa-icon [icon]="faXmark" size="xs"></fa-icon>
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

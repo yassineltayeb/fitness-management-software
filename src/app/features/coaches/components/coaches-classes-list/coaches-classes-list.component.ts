@@ -1,6 +1,7 @@
 import { CoachClassResponse } from './../../models/coach-class-response.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from 'src/app/shared/models/pagination.model';
+import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-coaches-classes-list',
@@ -11,6 +12,8 @@ export class CoachesClassesListComponent implements OnInit {
   @Input() coachClasses: CoachClassResponse[] = [];
   @Input() pagination = {} as Pagination
   @Output() currentPagination = new EventEmitter<Pagination>();
+  faEdit = faEdit;
+  faXmark = faXmark;
 
   constructor() { }
 
