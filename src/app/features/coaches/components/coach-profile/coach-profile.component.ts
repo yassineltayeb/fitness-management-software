@@ -1,3 +1,4 @@
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 import { CoachService } from 'src/app/features/coaches/services/coach.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -5,7 +6,6 @@ import { CoachTypeService } from './../../services/coach-type.service';
 import { CountryService } from './../../../../shared/services/country.service';
 import { GenderService } from './../../../../shared/services/gender.service';
 import { CityService } from './../../../../shared/services/city.service';
-import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CoachProfileResponse } from './../../models/coach-profile-response.model';
 import { ActivatedRoute, Data } from '@angular/router';
@@ -39,7 +39,7 @@ export class CoachProfileComponent implements OnInit {
     private genderService: GenderService,
     private spinner: NgxSpinnerService,
     private route: ActivatedRoute,
-    private toastr: ToastrService) { }
+    private toaster: ToasterService) { }
 
   ngOnInit() {
     this.getCoach();
@@ -81,7 +81,7 @@ export class CoachProfileComponent implements OnInit {
         this.coach = data['coach'];
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Coach Profile');
+        this.toaster.error('Profile', error.error.error);
       }
     });
   }
@@ -93,7 +93,7 @@ export class CoachProfileComponent implements OnInit {
         this.genders = genders;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Profile', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -109,7 +109,7 @@ export class CoachProfileComponent implements OnInit {
         this.countries = countries;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Profile', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -130,7 +130,7 @@ export class CoachProfileComponent implements OnInit {
         this.cities = cities;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Profile', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -162,10 +162,10 @@ export class CoachProfileComponent implements OnInit {
     this.spinner.show();
     this.coachService.updateCoach(this.coach.id, profileRequest)?.subscribe({
       next: (profileResponse: CoachProfileResponse) => {
-        this.toastr.success('Profile updated successfully', 'Profile');
+        this.toaster.success('Profile', 'Profile updated successfully');
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Profile');
+        this.toaster.error('Profile', error.error.error);
         this.spinner.hide();
       },
       complete: () => {

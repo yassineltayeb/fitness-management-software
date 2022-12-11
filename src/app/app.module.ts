@@ -11,10 +11,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './features/auth/auth.module';
 
-import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from './shared/shared.module';
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { MessageService } from 'primeng/api';
     SharedModule,
     CoachModule,
     NgxSpinnerModule,
-    ToastrModule.forRoot(),
+    ToastModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {

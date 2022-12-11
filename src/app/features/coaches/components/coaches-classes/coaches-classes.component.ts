@@ -1,5 +1,4 @@
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ToastrService } from 'ngx-toastr';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CoachClassService } from './../../services/coach-class.service';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +8,7 @@ import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
 import { ViewMode } from 'src/app/core/enums/view-mode.enum';
 import { MessageService } from 'primeng/api';
-import { TosterService } from 'src/app/shared/services/toaster.service';
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -27,7 +26,7 @@ export class CoachesClassesComponent implements OnInit {
   constructor(
     private coachClassService: CoachClassService,
     private spinner: NgxSpinnerService,
-    private toaster: TosterService) { }
+    private toaster: ToasterService) { }
 
   ngOnInit() {
     this.getCoachClasses();

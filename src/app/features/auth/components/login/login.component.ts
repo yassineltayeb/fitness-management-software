@@ -1,5 +1,5 @@
+import { ToasterService } from './../../../../shared/services/toaster.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../../shared/services/auth.service';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private toastr: ToastrService,
+    private toaster: ToasterService,
     private spinner: NgxSpinnerService
   ) {
     this.loginForm = new FormGroup({
@@ -43,10 +43,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(this.loginForm.value)?.subscribe({
       next: () => {
-        this.toastr.success('Logged in successfully', 'Login');
+        this.toaster.success('Login', 'Logged in successfully');
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Login');
+        this.toaster.error('Login', error.error.error);
         this.spinner.hide();
       },
       complete: () => {

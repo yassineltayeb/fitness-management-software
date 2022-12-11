@@ -1,7 +1,6 @@
+import { ToasterService } from 'src/app/shared/services/toaster.service';
 import { CoachTypeService } from './../../../coaches/services/coach-type.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CoachSignupRequest } from './../../../coaches/models/coach-signup-request.model';
-import { ToastrService } from 'ngx-toastr';
 import { CityService } from './../../../../shared/services/city.service';
 import { Component, OnInit } from '@angular/core';
 import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
@@ -35,7 +34,7 @@ export class SignupComponent implements OnInit {
     private cityService: CityService,
     private coachService: CoachService,
     private coachTypeService: CoachTypeService,
-    private toastr: ToastrService,
+    private toaster: ToasterService,
     private spinner: NgxSpinnerService
   ) { }
 
@@ -73,7 +72,7 @@ export class SignupComponent implements OnInit {
         this.genders = genders;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Sign Up', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -90,7 +89,7 @@ export class SignupComponent implements OnInit {
         this.spinner.hide();
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Sign Up', error.error.error);
         this.spinner.hide();
       }
     });
@@ -103,7 +102,7 @@ export class SignupComponent implements OnInit {
         this.cities = cities;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Sign Up', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -119,7 +118,7 @@ export class SignupComponent implements OnInit {
         this.coachTypes = coachTypes;
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Sign Up', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
@@ -149,12 +148,12 @@ export class SignupComponent implements OnInit {
     this.spinner.show();
     this.coachService.signUp(signupRequest)?.subscribe({
       next: (signupResponse: CoachSignupResponse) => {
-        this.toastr.success('You signed up successfully', 'Sign Up');
+        this.toaster.success('Sign Up', 'You signed up successfully');
         this.authService.setIsLoggedIn(true);
         this.signupForm.reset();
       },
       error: (error: HttpErrorResponse) => {
-        this.toastr.error(error.error.error, 'Sign Up');
+        this.toaster.error('Sign Up', error.error.error);
         this.spinner.hide();
       },
       complete: () => {

@@ -26,7 +26,6 @@
     "ng-multiselect-dropdown": "^0.3.9",
     "ngx-pagination": "^6.0.3",
     "ngx-spinner": "^14.0.0",
-    "ngx-toastr": "^16.0.1",
     "primeicons": "^6.0.1",
     "primeng": "^15.0.0-rc.1",
     "rxjs": "~7.5.0",
