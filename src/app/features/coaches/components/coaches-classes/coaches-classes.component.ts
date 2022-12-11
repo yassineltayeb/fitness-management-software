@@ -7,7 +7,6 @@ import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
 import { ViewMode } from 'src/app/core/enums/view-mode.enum';
-import { MessageService } from 'primeng/api';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
@@ -19,7 +18,7 @@ export class CoachesClassesComponent implements OnInit {
   coachClasses = {} as PagedResult<CoachClassResponse>;
   public pagination = {} as Pagination;
   searchTerm: string = "";
-  viewMode: ViewMode = 1;
+  viewMode: ViewMode = 2;
   faList = faList;
   faGrip = faGrip;
 

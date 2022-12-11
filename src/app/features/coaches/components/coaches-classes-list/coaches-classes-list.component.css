@@ -4,6 +4,11 @@
   text-align: justify;
 }
 
+.coaches-list--table thead {
+  background-color:var(--primary);
+  color: white;
+}
+
 /* thead tr {
   position: sticky;
   top: 0;

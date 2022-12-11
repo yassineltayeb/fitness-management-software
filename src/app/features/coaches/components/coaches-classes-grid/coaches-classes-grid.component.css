@@ -1,5 +1,20 @@
 .coaches-list--grid {
   max-height: 50vh;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   text-align: justify;
+}
+
+.coaches-list--grid .card-body fa-icon {
+  color: var(--primary);
+  margin-right: 8px;
+}
+
+.card-header {
+  background-color: var(--primary);
+  color: white;
+}
+
+.card-footer {
+  background-color: var(--secondary);
 }
