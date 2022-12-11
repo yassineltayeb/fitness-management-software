@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let coachClass of coachClasses | paginate : pagination">
+      <tr *ngFor="let coachClass of coachClasses">
         <td>{{ coachClass.title }}</td>
         <td>{{ coachClass.description }}</td>
         <td>{{ coachClass.location }}</td>
