@@ -18,7 +18,7 @@ export class CoachesClassesComponent implements OnInit {
   coachClasses = {} as PagedResult<CoachClassResponse>;
   public pagination = {} as Pagination;
   searchTerm: string = "";
-  viewMode: ViewMode = 2;
+  viewMode: ViewMode = 1;
   faList = faList;
   faGrip = faGrip;
 
