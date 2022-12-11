@@ -10,26 +10,35 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <i class="fa-regular fa-note"></i>
-            <p class="card-text">
-              <fa-icon [icon]="faNoteSticky"></fa-icon
-              >{{ coachClass.description }}
-            </p>
-            <p class="card-text">
-              <fa-icon [icon]="faLocationDot"></fa-icon
-              >{{ coachClass.location }}
-            </p>
-            <p>
-              <fa-icon [icon]="faCalendar"></fa-icon>
-              {{ coachClass.classDate | date : "dd-MMM-yyyy HH:mm" }}
-            </p>
-            <p>
-              <fa-icon [icon]="faClock"></fa-icon> {{ coachClass.duration }}
-            </p>
-            <p class="mb-0">
-              <fa-icon [icon]="faUsers"></fa-icon>
-              {{ coachClass.availableSpaces }}
-            </p>
+            <div class="row">
+              <p>
+                <fa-icon [icon]="faNoteSticky"></fa-icon
+                >{{ coachClass.description }}
+              </p>
+            </div>
+            <div class="row">
+              <p>
+                <fa-icon [icon]="faLocationDot"></fa-icon
+                >{{ coachClass.location }}
+              </p>
+            </div>
+            <div class="row">
+              <p>
+                <fa-icon [icon]="faCalendar"></fa-icon
+                >{{ coachClass.classDate | date : "dd-MMM-yyyy HH:mm" }}
+              </p>
+            </div>
+            <div class="row">
+              <p>
+                <fa-icon [icon]="faClock"></fa-icon>{{ coachClass.duration }}
+              </p>
+            </div>
+            <div class="row">
+              <p class="mb-0">
+                <fa-icon [icon]="faUsers"></fa-icon
+                >{{ coachClass.availableSpaces }}
+              </p>
+            </div>
           </div>
         </div>
         <div class="card-footer">
