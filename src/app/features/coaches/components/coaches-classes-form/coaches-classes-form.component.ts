@@ -63,7 +63,12 @@ export class CoachesClassesFormComponent implements OnInit {
   onSubmit() {
     const currentUser = this.authService.getCurrentUser();
     const coachClassRequest = { ...this.coachClassForm.value, coachId: currentUser.userId };
-    console.log(coachClassRequest);
+    if (this.config.data.id === 0) {
+      this.addCoachClass(coachClassRequest);
+    }
+  }
+
+  addCoachClass(coachClassRequest: any) {
     this.coachClassService.addCoachClass(coachClassRequest).subscribe({
       next: (coachClass: CoachClassResponse) => {
 
