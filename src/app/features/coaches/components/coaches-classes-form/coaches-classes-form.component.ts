@@ -46,6 +46,18 @@ export class CoachesClassesFormComponent implements OnInit {
     );
   }
 
+  populateForm() {
+    console.log('populate', this.coachClass);
+    this.coachClassForm.setValue({
+      title: this.coachClass.title,
+      location: this.coachClass.location,
+      classDate: formatDate(this.coachClass.classDate, 'yyyy-MM-dd', 'en'),
+      duration: this.coachClass.duration,
+      availableSpaces: this.coachClass.availableSpaces,
+      description: this.coachClass.description,
+    })
+  }
+
   getCoachClass() {
     this.coachClassService.getCoachClassById(this.config.data.id).subscribe({
       next: (coachClass: CoachClassResponse) => {
@@ -56,6 +68,7 @@ export class CoachesClassesFormComponent implements OnInit {
 
       },
       complete: () => {
+        this.populateForm();
       }
     });
   }
@@ -65,6 +78,9 @@ export class CoachesClassesFormComponent implements OnInit {
     const coachClassRequest = { ...this.coachClassForm.value, coachId: currentUser.userId };
     if (this.config.data.id === 0) {
       this.addCoachClass(coachClassRequest);
+    }
+    else {
+      this.getCoachClass();
     }
   }
 

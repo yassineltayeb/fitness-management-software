@@ -76,6 +76,7 @@
         [coachClasses]="coachClasses.data"
         [pagination]="pagination"
         (currentPagination)="onPageChange($event)"
+        (selectedCoachClassId)="onCoachClassEdit($event)"
       ></app-coaches-classes-list>
     </ng-template>
     <ng-template #gridView>
@@ -83,6 +84,7 @@
         [coachClasses]="coachClasses.data"
         [pagination]="pagination"
         (currentPagination)="onPageChange($event)"
+        (selectedCoachClassId)="onCoachClassEdit($event)"
       ></app-coaches-classes-grid>
     </ng-template>
   </div>

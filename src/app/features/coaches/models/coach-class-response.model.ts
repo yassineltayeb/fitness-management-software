@@ -1,6 +1,7 @@
 import { KeyValuePairs } from "src/app/shared/models/key-value-pairs.model";
 
 export interface CoachClassResponse {
+  id: number;
   title: string;
   description: string;
   location: string;

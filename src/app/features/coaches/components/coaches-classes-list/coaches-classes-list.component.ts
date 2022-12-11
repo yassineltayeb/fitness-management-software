@@ -12,6 +12,7 @@ export class CoachesClassesListComponent implements OnInit {
   @Input() coachClasses: CoachClassResponse[] = [];
   @Input() pagination = {} as Pagination
   @Output() currentPagination = new EventEmitter<Pagination>();
+  @Output() selectedCoachClassId = new EventEmitter<number>();
   faEdit = faEdit;
   faXmark = faXmark;
 
@@ -20,9 +21,14 @@ export class CoachesClassesListComponent implements OnInit {
   ngOnInit() {
   }
 
+  /* --------------------------------- Events --------------------------------- */
   pageChangeEvent(event: any) {
     this.pagination.currentPage = event.page + 1;
     this.pagination.itemsPerPage = event.rows;
     this.currentPagination.emit(this.pagination);
+  }
+
+  onEdit(coachClassId: number) {
+    this.selectedCoachClassId.emit(coachClassId);
   }
 }

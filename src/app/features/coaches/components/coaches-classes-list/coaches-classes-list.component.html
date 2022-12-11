@@ -22,7 +22,7 @@
         <td>{{ coachClass.availableSpaces }}</td>
         <td>{{ coachClass.description }}</td>
         <td class="d-flex justify-content-center">
-          <button class="btn btn-warning me-3">
+          <button class="btn btn-warning me-3" (click)="onEdit(coachClass.id)">
             <fa-icon [icon]="faEdit" size="xs"></fa-icon>
           </button>
           <button class="btn btn-danger">

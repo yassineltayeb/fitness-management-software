@@ -64,13 +64,18 @@ export class CoachesClassesComponent implements OnInit {
     this.viewMode = viewMode;
   }
 
-  showCoachClassForm() {
+  showCoachClassForm(coachClassId: number = 0) {
+    console.log('selected coach class id', coachClassId);
     const ref = this.dialogService.open(CoachesClassesFormComponent, {
       data: {
-        id: 0
+        id: coachClassId
       },
       header: 'Add New Class',
       width: '80%'
     });
+  }
+
+  onCoachClassEdit(coachClassId: number) {
+    this.showCoachClassForm(coachClassId);
   }
 }
