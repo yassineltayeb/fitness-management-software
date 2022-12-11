@@ -14,6 +14,7 @@ import { AuthModule } from './features/auth/auth.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from './shared/shared.module';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { SharedModule } from './shared/shared.module';
     })
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

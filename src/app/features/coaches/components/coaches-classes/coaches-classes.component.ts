@@ -8,6 +8,7 @@ import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
 import { ViewMode } from 'src/app/core/enums/view-mode.enum';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -25,10 +26,12 @@ export class CoachesClassesComponent implements OnInit {
   constructor(
     private coachClassService: CoachClassService,
     private toaster: ToastrService,
-    private spinner: NgxSpinnerService) { }
+    private spinner: NgxSpinnerService,
+    private messageService: MessageService) { }
 
   ngOnInit() {
     this.getCoachClasses();
+    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
   }
 
   getCoachClasses() {
@@ -41,6 +44,7 @@ export class CoachesClassesComponent implements OnInit {
         this.pagination.currentPage = coachClasses.currentPage;
         this.pagination.totalItems = coachClasses.totalItems;
         console.log('coachClasses', coachClasses);
+        this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
       },
       error: (error: HttpErrorResponse) => {
         this.toaster.error(error.error.error);
