@@ -9,6 +9,7 @@ import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
 import { ViewMode } from 'src/app/core/enums/view-mode.enum';
 import { MessageService } from 'primeng/api';
+import { TosterService } from 'src/app/shared/services/toaster.service';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -25,13 +26,12 @@ export class CoachesClassesComponent implements OnInit {
 
   constructor(
     private coachClassService: CoachClassService,
-    private toaster: ToastrService,
     private spinner: NgxSpinnerService,
-    private messageService: MessageService) { }
+    private toaster: TosterService) { }
 
   ngOnInit() {
     this.getCoachClasses();
-    this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
+
   }
 
   getCoachClasses() {
@@ -43,11 +43,9 @@ export class CoachesClassesComponent implements OnInit {
         this.pagination.itemsPerPage = coachClasses.itemsPerPage;
         this.pagination.currentPage = coachClasses.currentPage;
         this.pagination.totalItems = coachClasses.totalItems;
-        console.log('coachClasses', coachClasses);
-        this.messageService.add({ severity: 'success', summary: 'Service Message', detail: 'Via MessageService' });
       },
       error: (error: HttpErrorResponse) => {
-        this.toaster.error(error.error.error);
+        this.toaster.error('Classes', error.error.error);
         this.spinner.hide();
       },
       complete: () => {
