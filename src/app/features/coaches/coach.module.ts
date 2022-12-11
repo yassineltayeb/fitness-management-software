@@ -10,6 +10,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { CoachesClassesListComponent } from './components/coaches-classes-list/coaches-classes-list.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastModule } from 'primeng/toast';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ToastModule } from 'primeng/toast';
     FontAwesomeModule,
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
-    ToastModule
+    ToastModule,
+    PaginatorModule
   ],
   exports: [
     CoachProfileComponent,

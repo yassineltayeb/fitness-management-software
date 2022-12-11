@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Pagination } from 'src/app/shared/models/pagination.model';
+import { CoachClassResponse } from '../../models/coach-class-response.model';
 
 @Component({
   selector: 'app-coaches-classes-grid',
@@ -6,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./coaches-classes-grid.component.css']
 })
 export class CoachesClassesGridComponent implements OnInit {
+  @Input() coachClasses: CoachClassResponse[] = [];
+  @Input() pagination = {} as Pagination
+  @Output() currentPagination = new EventEmitter<Pagination>();
+  faEdit = faEdit;
+  faXmark = faXmark;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  pageChangeEvent(event: any) {
+    this.pagination.currentPage = event.page + 1;
+    this.pagination.itemsPerPage = event.rows;
+    this.currentPagination.emit(this.pagination);
+  }
 }

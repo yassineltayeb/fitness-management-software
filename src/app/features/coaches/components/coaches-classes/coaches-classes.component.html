@@ -77,7 +77,11 @@
       ></app-coaches-classes-list>
     </ng-template>
     <ng-template #gridView>
-      <app-coaches-classes-grid></app-coaches-classes-grid>
+      <app-coaches-classes-grid
+        [coachClasses]="coachClasses.data"
+        [pagination]="pagination"
+        (currentPagination)="onPageChange($event)"
+      ></app-coaches-classes-grid>
     </ng-template>
   </div>
 </div>

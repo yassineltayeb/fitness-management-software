@@ -20,9 +20,9 @@ export class CoachesClassesListComponent implements OnInit {
   ngOnInit() {
   }
 
-  pageChangeEvent(event: number) {
-    this.pagination.currentPage = event;
-    console.log('sent pagination', this.pagination);
+  pageChangeEvent(event: any) {
+    this.pagination.currentPage = event.page + 1;
+    this.pagination.itemsPerPage = event.rows;
     this.currentPagination.emit(this.pagination);
   }
 }
