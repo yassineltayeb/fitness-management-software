@@ -8,6 +8,8 @@ import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faList, faGrip } from '@fortawesome/free-solid-svg-icons';
 import { ViewMode } from 'src/app/core/enums/view-mode.enum';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CoachesClassesFormComponent } from '../coaches-classes-form/coaches-classes-form.component';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -25,11 +27,11 @@ export class CoachesClassesComponent implements OnInit {
   constructor(
     private coachClassService: CoachClassService,
     private spinner: NgxSpinnerService,
-    private toaster: ToasterService) { }
+    private toaster: ToasterService,
+    public dialogService: DialogService) { }
 
   ngOnInit() {
     this.getCoachClasses();
-
   }
 
   getCoachClasses() {
@@ -60,5 +62,15 @@ export class CoachesClassesComponent implements OnInit {
 
   onViewModeChange(viewMode: number) {
     this.viewMode = viewMode;
+  }
+
+  showCoachClassForm() {
+    const ref = this.dialogService.open(CoachesClassesFormComponent, {
+      data: {
+        id: 0
+      },
+      header: 'Add New Class',
+      width: '80%'
+    });
   }
 }

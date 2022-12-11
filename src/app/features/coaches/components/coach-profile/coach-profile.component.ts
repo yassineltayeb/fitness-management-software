@@ -49,7 +49,7 @@ export class CoachProfileComponent implements OnInit {
     this.initForm();
   }
 
-  async initForm() {
+  initForm() {
     this.profileForm = new FormGroup({
       firstName: new FormControl(this.coach.firstName, Validators.required),
       lastName: new FormControl(this.coach.lastName, Validators.required),

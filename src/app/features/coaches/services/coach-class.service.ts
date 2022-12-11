@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { CoachClassRequest } from '../models/coach-class-request.model';
 
 @Injectable(
   {
@@ -28,6 +29,14 @@ export class CoachClassService {
     return this.http.get<PagedResult<CoachClassResponse>>(this.baseUrl, {
       params: queryParams
     });
+  }
+
+  addCoachClass(coachClass: CoachClassRequest): Observable<CoachClassResponse> {
+    return this.http.post<CoachClassResponse>(this.baseUrl, coachClass);
+  }
+
+  getCoachClassById(coachClassId: number): Observable<CoachClassResponse> {
+    return this.http.get<CoachClassResponse>(this.baseUrl + '/' + coachClassId);
   }
 
 }

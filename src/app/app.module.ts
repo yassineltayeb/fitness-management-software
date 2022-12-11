@@ -15,6 +15,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { SharedModule } from './shared/shared.module';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ToastModule } from 'primeng/toast';
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    MessageService
+    MessageService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

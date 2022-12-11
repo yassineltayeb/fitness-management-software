@@ -11,13 +11,16 @@ import { CoachesClassesListComponent } from './components/coaches-classes-list/c
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { CoachesClassesFormComponent } from './components/coaches-classes-form/coaches-classes-form.component';
 
 @NgModule({
   declarations: [
     CoachProfileComponent,
     CoachesClassesComponent,
     CoachesClassesListComponent,
-    CoachesClassesGridComponent
+    CoachesClassesGridComponent,
+    CoachesClassesFormComponent
   ],
   imports: [
     CommonModule,
@@ -28,13 +31,15 @@ import { PaginatorModule } from 'primeng/paginator';
     NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastModule,
-    PaginatorModule
+    PaginatorModule,
+    DynamicDialogModule
   ],
   exports: [
     CoachProfileComponent,
     CoachesClassesComponent,
     CoachesClassesListComponent,
-    CoachesClassesGridComponent
+    CoachesClassesGridComponent,
+    CoachesClassesFormComponent
   ]
 })
 export class CoachModule { }
