@@ -39,8 +39,14 @@ export class CoachesClassesFormComponent implements OnInit {
       title: new FormControl('', Validators.required),
       location: new FormControl('', Validators.required),
       classDate: new FormControl('', Validators.required),
-      duration: new FormControl(0, Validators.required),
-      availableSpaces: new FormControl(0, Validators.required),
+      duration: new FormControl(0, [
+        Validators.required,
+        Validators.min(1)
+      ]),
+      availableSpaces: new FormControl(0, [
+        Validators.required,
+        Validators.min(1)
+      ]),
       description: new FormControl('', Validators.required),
     }
     );
@@ -94,6 +100,8 @@ export class CoachesClassesFormComponent implements OnInit {
       },
       complete: () => {
         this.toasterService.success('Coach Class', 'Class Added Successfully');
+        this.coachClassForm.reset();
+        this.ref.close();
       }
     });
   }

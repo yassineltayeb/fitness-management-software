@@ -70,7 +70,7 @@
           />
           <span
             class="text-danger"
-            *ngIf="coachClassFormControls['duration'].errors?.['required'] && coachClassFormControls['duration'].touched"
+            *ngIf="(coachClassFormControls['duration'].errors?.['required'] || coachClassFormControls['duration'].errors?.['min']) && coachClassFormControls['duration'].touched"
             >Duration is required
           </span>
         </div>
@@ -91,7 +91,7 @@
           />
           <span
             class="text-danger"
-            *ngIf="coachClassFormControls['availableSpaces'].errors?.['required'] && coachClassFormControls['availableSpaces'].touched"
+            *ngIf="(coachClassFormControls['availableSpaces'].errors?.['required'] || coachClassFormControls['availableSpaces'].errors?.['min']) && coachClassFormControls['availableSpaces'].touched"
             >Available Spaces is required
           </span>
         </div>
@@ -118,7 +118,13 @@
         <button class="btn btn-block btn-primary text-white me-3" type="submit">
           Save
         </button>
-        <button class="btn btn-block btn-secondary" type="button" (click)="onClear()">Clear</button>
+        <button
+          class="btn btn-block btn-secondary"
+          type="button"
+          (click)="onClear()"
+        >
+          Clear
+        </button>
       </div>
     </div>
   </div>
