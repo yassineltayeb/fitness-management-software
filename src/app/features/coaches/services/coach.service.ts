@@ -37,8 +37,6 @@ export class CoachService {
   }
 
   updateCoach(coachId: number, coach: CoachProfileRequest) {
-    console.log('id', coachId);
-    console.log('coach', coach);
     return this.http.put<CoachProfileResponse>(this.baseUrl + '/' + coachId, coach);
   }
 }

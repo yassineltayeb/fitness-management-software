@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('show');
     this.spinner.show();
     this.loginForm.controls['userType'].setValue(this.userType);
 

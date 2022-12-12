@@ -115,8 +115,12 @@
     </div>
     <div class="row mt-3">
       <div class="d-flex justify-content-end">
-        <button class="btn btn-block btn-primary text-white me-3" type="submit">
-          Save
+        <button
+          class="btn btn-block btn-primary text-white me-3"
+          type="submit"
+          [disabled]="!coachClassForm.valid"
+        >
+          {{ coachClass.id == 0 ? "Save" : "Update" }}
         </button>
         <button
           class="btn btn-block btn-secondary"

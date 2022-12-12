@@ -39,4 +39,8 @@ export class CoachClassService {
     return this.http.get<CoachClassResponse>(this.baseUrl + '/' + coachClassId);
   }
 
+  updateCoachClass(coachClassId: number, coachClass: CoachClassRequest): Observable<CoachClassResponse> {
+    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId, coachClass);
+  }
+
 }

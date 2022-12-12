@@ -65,13 +65,17 @@ export class CoachesClassesComponent implements OnInit {
   }
 
   showCoachClassForm(coachClassId: number = 0) {
-    console.log('selected coach class id', coachClassId);
     const ref = this.dialogService.open(CoachesClassesFormComponent, {
       data: {
         id: coachClassId
       },
-      header: 'Add New Class',
-      width: '80%'
+      header: (coachClassId == 0) ? 'Add New Class' : 'Update Class',
+      width: '60%'
+    });
+
+    ref.onClose.subscribe(() => {
+      this.pagination.currentPage = 1;
+      this.getCoachClasses();
     });
   }
 

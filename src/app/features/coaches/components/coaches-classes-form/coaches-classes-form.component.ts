@@ -1,12 +1,10 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthService } from './../../../../shared/services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CoachClassService } from './../../services/coach-class.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CoachService } from './../../services/coach.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { CoachClassRequest } from '../../models/coach-class-request.model';
 import { formatDate } from '@angular/common';
 import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
@@ -25,11 +23,14 @@ export class CoachesClassesFormComponent implements OnInit {
     private authService: AuthService,
     public ref: DynamicDialogRef,
     public config: DynamicDialogConfig,
-    private toasterService: ToasterService) { }
+    private toasterService: ToasterService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.coachClass.id = this.config.data.id;
+
     this.initForm();
-    if (this.config.data.id != 0) {
+    if (this.coachClass.id != 0) {
       this.getCoachClass();
     }
   }
@@ -53,7 +54,6 @@ export class CoachesClassesFormComponent implements OnInit {
   }
 
   populateForm() {
-    console.log('populate', this.coachClass);
     this.coachClassForm.setValue({
       title: this.coachClass.title,
       location: this.coachClass.location,
@@ -65,6 +65,7 @@ export class CoachesClassesFormComponent implements OnInit {
   }
 
   getCoachClass() {
+    this.spinner.show();
     this.coachClassService.getCoachClassById(this.config.data.id).subscribe({
       next: (coachClass: CoachClassResponse) => {
         this.coachClass = coachClass;
@@ -75,6 +76,7 @@ export class CoachesClassesFormComponent implements OnInit {
       },
       complete: () => {
         this.populateForm();
+        this.spinner.hide();
       }
     });
   }
@@ -86,21 +88,41 @@ export class CoachesClassesFormComponent implements OnInit {
       this.addCoachClass(coachClassRequest);
     }
     else {
-      this.getCoachClass();
+      this.updateCoachClass(coachClassRequest);
     }
   }
 
   addCoachClass(coachClassRequest: any) {
+    this.spinner.show();
     this.coachClassService.addCoachClass(coachClassRequest).subscribe({
       next: (coachClass: CoachClassResponse) => {
 
       },
       error: (error: HttpErrorResponse) => {
         this.toasterService.error('Coach Class', error.error.error);
+        this.spinner.hide();
       },
       complete: () => {
         this.toasterService.success('Coach Class', 'Class Added Successfully');
         this.coachClassForm.reset();
+        this.spinner.hide();
+        this.ref.close();
+      }
+    });
+  }
+
+  updateCoachClass(coachClassRequest: any) {
+    this.spinner.show();
+    this.coachClassService.updateCoachClass(this.config.data.id, coachClassRequest).subscribe({
+      next: (coachClass: CoachClassResponse) => {
+      },
+      error: (error: HttpErrorResponse) => {
+        this.toasterService.error('Coach Class', error.error.error);
+        this.spinner.hide();
+      },
+      complete: () => {
+        this.toasterService.success('Coach Class', 'Class Updated Successfully');
+        this.spinner.hide();
         this.ref.close();
       }
     });
