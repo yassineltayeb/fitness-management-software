@@ -1,3 +1,4 @@
+import { CoachHomeComponent } from './components/coach-home/coach-home.component';
 import { CoachesClassesComponent } from './components/coaches-classes/coaches-classes.component';
 import { CoachProfileComponent } from './components/coach-profile/coach-profile.component';
 import { Route, RouterModule } from '@angular/router';
@@ -13,6 +14,11 @@ const coachRoutes: Route[] = [
   {
     path: ':coachId/classes',
     component: CoachesClassesComponent,
+    resolve: { coach: CoachProfileResolver }
+  },
+  {
+    path: ':coachId/home',
+    component: CoachHomeComponent,
     resolve: { coach: CoachProfileResolver }
   }
 ];

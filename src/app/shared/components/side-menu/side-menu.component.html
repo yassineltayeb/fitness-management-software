@@ -17,8 +17,14 @@
         <span class="title">Menu</span>
       </a>
     </li>
-    <li>
-      <a>
+    <li *ngIf="currentUser.userId != 1">
+      <a [routerLink]="['coach', currentUser.userId, 'home']">
+        <span class="icon"><fa-icon [icon]="faHome"></fa-icon></span>
+        <span class="title">Main</span>
+      </a>
+    </li>
+    <li *ngIf="currentUser.userId != 2">
+      <a [routerLink]="['member', currentUser.userId, 'home']">
         <span class="icon"><fa-icon [icon]="faHome"></fa-icon></span>
         <span class="title">Main</span>
       </a>

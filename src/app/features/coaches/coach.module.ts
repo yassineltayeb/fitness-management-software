@@ -1,3 +1,4 @@
+import { CoachHomeComponent } from './components/coach-home/coach-home.component';
 import { CoachesClassesGridComponent } from './components/coaches-classes-grid/coaches-classes-grid.component';
 import { CoachesClassesComponent } from './components/coaches-classes/coaches-classes.component';
 import { CoachProfileComponent } from './components/coach-profile/coach-profile.component';
@@ -20,7 +21,8 @@ import { CoachesClassesFormComponent } from './components/coaches-classes-form/c
     CoachesClassesComponent,
     CoachesClassesListComponent,
     CoachesClassesGridComponent,
-    CoachesClassesFormComponent
+    CoachesClassesFormComponent,
+    CoachHomeComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +41,8 @@ import { CoachesClassesFormComponent } from './components/coaches-classes-form/c
     CoachesClassesComponent,
     CoachesClassesListComponent,
     CoachesClassesGridComponent,
-    CoachesClassesFormComponent
+    CoachesClassesFormComponent,
+    CoachHomeComponent
   ]
 })
 export class CoachModule { }
