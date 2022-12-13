@@ -57,7 +57,8 @@ export class CoachProfileComponent implements OnInit {
       phone: new FormControl(this.coach.phone, Validators.required),
       coachTypesIds: new FormControl(null, Validators.required),
       countryId: new FormControl(this.coach.countryId, Validators.required),
-      dateOfBirth: new FormControl(formatDate(this.coach.dateOfBirth, 'yyyy-MM-dd', 'en'), Validators.required),
+      dateOfBirth: new FormControl(new Date(this.coach.dateOfBirth), Validators.required),
+      // dateOfBirth: new FormControl(formatDate(this.coach.dateOfBirth, 'yyyy-MM-dd', 'en'), Validators.required),
     }
     );
 

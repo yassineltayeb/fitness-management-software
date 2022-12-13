@@ -142,13 +142,19 @@
           <div class="col-lg-6">
             <div class="from-group">
               <label class="form-label" for="dateOfBirth">Date of Birth</label>
-              <input
+              <p-calendar
+                dateFormat="dd-M-yy"
+                inputId="dateOfBirth"
+                appendTo="body"
+                formControlName="dateOfBirth"
+              ></p-calendar>
+              <!-- <input
                 type="date"
                 name="dateOfBirth"
                 id="dateOfBirth"
                 class="form-control"
                 formControlName="dateOfBirth"
-              />
+              /> -->
               <span
                 class="text-danger"
                 *ngIf="profileFormControls['dateOfBirth'].errors?.['required'] && profileFormControls['dateOfBirth'].touched"
