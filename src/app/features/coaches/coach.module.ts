@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { PaginatorModule } from 'primeng/paginator';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CoachesClassesFormComponent } from './components/coaches-classes-form/coaches-classes-form.component';
+import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { CoachesClassesFormComponent } from './components/coaches-classes-form/c
     NgMultiSelectDropDownModule.forRoot(),
     ToastModule,
     PaginatorModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    CalendarModule
   ],
   exports: [
     CoachProfileComponent,

@@ -43,13 +43,13 @@
       <div class="col-lg-6">
         <div class="from-group">
           <label class="form-label" for="classDate">Date/Time</label>
-          <input
-            type="date"
-            name="classDate"
-            id="classDate"
-            class="form-control"
+          <p-calendar
+            [showTime]="true"
+            dateFormat="dd-M-yy"
+            inputId="time"
+            appendTo="body"
             formControlName="classDate"
-          />
+          ></p-calendar>
           <span
             class="text-danger"
             *ngIf="coachClassFormControls['classDate'].errors?.['required'] && coachClassFormControls['classDate'].touched"

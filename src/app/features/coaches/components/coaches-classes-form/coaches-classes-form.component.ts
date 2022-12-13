@@ -57,11 +57,12 @@ export class CoachesClassesFormComponent implements OnInit {
     this.coachClassForm.setValue({
       title: this.coachClass.title,
       location: this.coachClass.location,
-      classDate: formatDate(this.coachClass.classDate, 'yyyy-MM-dd', 'en'),
+      // classDate: formatDate(this.coachClass.classDate, 'dd-MMM-yyyy', 'en'),
+      classDate: new Date(this.coachClass.classDate),
       duration: this.coachClass.duration,
       availableSpaces: this.coachClass.availableSpaces,
       description: this.coachClass.description,
-    })
+    });
   }
 
   getCoachClass() {
@@ -69,6 +70,7 @@ export class CoachesClassesFormComponent implements OnInit {
     this.coachClassService.getCoachClassById(this.config.data.id).subscribe({
       next: (coachClass: CoachClassResponse) => {
         this.coachClass = coachClass;
+        console.log('coach Class', this.coachClass);
       },
       error: (error: HttpErrorResponse) => {
         this.toasterService.error('Coach Class', error.error.error);
@@ -82,6 +84,7 @@ export class CoachesClassesFormComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('coach Form', this.coachClassForm);
     const currentUser = this.authService.getCurrentUser();
     const coachClassRequest = { ...this.coachClassForm.value, coachId: currentUser.userId };
     if (this.config.data.id === 0) {
