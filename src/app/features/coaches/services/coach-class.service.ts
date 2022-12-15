@@ -44,6 +44,10 @@ export class CoachClassService {
     return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId, coachClass);
   }
 
+  updateCoachClassStatus(coachClassId: number, statusId: CoachClassStatus) {
+    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId + '/status/' + statusId, null);
+  }
+
   /* ---------------------------- Status Functions ---------------------------- */
   getCoachClassStatusById(statusId: number): string {
     switch (statusId) {
