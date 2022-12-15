@@ -10,6 +10,8 @@ import { ViewMode } from 'src/app/core/enums/view-mode.enum';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
 import { DialogService } from 'primeng/dynamicdialog';
 import { CoachesClassesFormComponent } from '../coaches-classes-form/coaches-classes-form.component';
+import { ConfirmationService } from 'primeng/api';
+import { CoachClassStatus } from 'src/app/core/enums/coach-class-status.enum';
 
 @Component({
   selector: 'app-coaches-classes',
@@ -28,7 +30,8 @@ export class CoachesClassesComponent implements OnInit {
     private coachClassService: CoachClassService,
     private spinner: NgxSpinnerService,
     private toaster: ToasterService,
-    public dialogService: DialogService) { }
+    public dialogService: DialogService,
+    private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.getCoachClasses();
@@ -81,5 +84,26 @@ export class CoachesClassesComponent implements OnInit {
 
   onCoachClassEdit(coachClassId: number) {
     this.showCoachClassForm(coachClassId);
+  }
+
+  /* --------------------------------- Events --------------------------------- */
+  onCoachClassDelete(coachClass: CoachClassResponse) {
+    this.confirmationService.confirm({
+      message: 'Are you sure you want to cancel this class?',
+      header: 'Cancel Coach Class',
+      icon: 'pi pi-exclamation-circle',
+      accept: () => {
+        this.coachClassService.updateCoachClassStatus(coachClass.id, CoachClassStatus.Canceled).subscribe({
+          next: (CoachClass: CoachClassResponse) => {
+          },
+          error: () => {
+          },
+          complete: () => {
+            this.getCoachClasses();
+            this.toaster.success('Coach Class', 'Coach Class Deleted!');
+          }
+        });
+      }
+    });
   }
 }

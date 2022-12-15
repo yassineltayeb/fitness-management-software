@@ -14,6 +14,7 @@ export class CoachesClassesGridComponent implements OnInit {
   @Input() pagination = {} as Pagination
   @Output() currentPagination = new EventEmitter<Pagination>();
   @Output() selectedCoachClassId = new EventEmitter<number>();
+  @Output() DeletedCoachClass = new EventEmitter<CoachClassResponse>();
   faNoteSticky = faNoteSticky;
   faLocationDot = faLocationDot;
   faCalendar = faCalendar;
@@ -43,5 +44,10 @@ export class CoachesClassesGridComponent implements OnInit {
 
   getCoachClassStatusColor(statusId: number): string {
     return this.coachClassService.getCoachClassStatusColor(statusId);
+  }
+
+  /* --------------------------------- Events --------------------------------- */
+  onDelete(coachClass: CoachClassResponse) {
+    this.DeletedCoachClass.emit(coachClass);
   }
 }

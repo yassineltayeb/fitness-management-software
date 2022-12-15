@@ -77,6 +77,7 @@
         [pagination]="pagination"
         (currentPagination)="onPageChange($event)"
         (selectedCoachClassId)="onCoachClassEdit($event)"
+        (DeletedCoachClass)="onCoachClassDelete($event)"
       ></app-coaches-classes-list>
     </ng-template>
     <ng-template #gridView>
@@ -85,6 +86,7 @@
         [pagination]="pagination"
         (currentPagination)="onPageChange($event)"
         (selectedCoachClassId)="onCoachClassEdit($event)"
+        (DeletedCoachClass)="onCoachClassDelete($event)"
       ></app-coaches-classes-grid>
     </ng-template>
   </div>

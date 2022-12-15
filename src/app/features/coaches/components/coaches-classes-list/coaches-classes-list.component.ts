@@ -1,8 +1,11 @@
+import { ToasterService } from './../../../../shared/services/toaster.service';
 import { CoachClassService } from './../../services/coach-class.service';
 import { CoachClassResponse } from './../../models/coach-class-response.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { ConfirmationService } from 'primeng/api';
+import { CoachClassStatus } from 'src/app/core/enums/coach-class-status.enum';
 
 @Component({
   selector: 'app-coaches-classes-list',
@@ -14,10 +17,14 @@ export class CoachesClassesListComponent implements OnInit {
   @Input() pagination = {} as Pagination
   @Output() currentPagination = new EventEmitter<Pagination>();
   @Output() selectedCoachClassId = new EventEmitter<number>();
+  @Output() DeletedCoachClass = new EventEmitter<CoachClassResponse>();
   faEdit = faEdit;
   faXmark = faXmark;
 
-  constructor(private coachClassService: CoachClassService) { }
+  constructor(
+    private coachClassService: CoachClassService,
+    private confirmationService: ConfirmationService,
+    private toasterService: ToasterService) { }
 
   ngOnInit() {
   }
@@ -39,5 +46,10 @@ export class CoachesClassesListComponent implements OnInit {
 
   getCoachClassStatusColor(statusId: number): string {
     return this.coachClassService.getCoachClassStatusColor(statusId);
+  }
+
+  /* --------------------------------- Events --------------------------------- */
+  onDelete(coachClass: CoachClassResponse) {
+    this.DeletedCoachClass.emit(coachClass);
   }
 }

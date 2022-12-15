@@ -16,6 +16,8 @@ import { SharedModule } from './shared/shared.module';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { DialogService } from 'primeng/dynamicdialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { DialogService } from 'primeng/dynamicdialog';
     CoachModule,
     NgxSpinnerModule,
     ToastModule,
+    ConfirmDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -46,7 +49,8 @@ import { DialogService } from 'primeng/dynamicdialog';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     MessageService,
-    DialogService
+    DialogService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
