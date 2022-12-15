@@ -1,3 +1,4 @@
+import { CoachClassService } from './../../services/coach-class.service';
 import { CoachClassResponse } from './../../models/coach-class-response.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from 'src/app/shared/models/pagination.model';
@@ -16,7 +17,7 @@ export class CoachesClassesListComponent implements OnInit {
   faEdit = faEdit;
   faXmark = faXmark;
 
-  constructor() { }
+  constructor(private coachClassService: CoachClassService) { }
 
   ngOnInit() {
   }
@@ -30,5 +31,13 @@ export class CoachesClassesListComponent implements OnInit {
 
   onEdit(coachClassId: number) {
     this.selectedCoachClassId.emit(coachClassId);
+  }
+
+  getCoachClassStatusById(statusId: number): string {
+    return this.coachClassService.getCoachClassStatusById(statusId);
+  }
+
+  getCoachClassStatusColor(statusId: number): string {
+    return this.coachClassService.getCoachClassStatusColor(statusId);
   }
 }

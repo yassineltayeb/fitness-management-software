@@ -5,6 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CoachClassRequest } from '../models/coach-class-request.model';
+import { CoachClassStatus } from 'src/app/core/enums/coach-class-status.enum';
 
 @Injectable(
   {
@@ -43,4 +44,34 @@ export class CoachClassService {
     return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId, coachClass);
   }
 
+  /* ---------------------------- Status Functions ---------------------------- */
+  getCoachClassStatusById(statusId: number): string {
+    switch (statusId) {
+      case CoachClassStatus.Booking:
+        return 'Booking';
+      case CoachClassStatus.OnProgress:
+        return 'On Progress';
+      case CoachClassStatus.Finished:
+        return 'Finished';
+      case CoachClassStatus.Canceled:
+        return 'Canceled';
+    }
+
+    return 'N/A';
+  }
+
+  getCoachClassStatusColor(statusId: number): string {
+    switch (statusId) {
+      case CoachClassStatus.Booking:
+        return 'text-bg-primary';
+      case CoachClassStatus.OnProgress:
+        return 'text-bg-info';
+      case CoachClassStatus.Finished:
+        return 'text-bg-success';
+      case CoachClassStatus.Canceled:
+        return 'text-bg-danger';
+    }
+
+    return 'text-bg-secondary';
+  }
 }

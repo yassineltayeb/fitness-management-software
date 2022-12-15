@@ -1,9 +1,10 @@
-<div class="coaches-list--table">
+<div class="coaches-list--table table-responsive">
   <table
-    class="table table-striped table-hover table-bordered table-responsive"
+    class="table table-striped table-hover table-bordered table-responsive align-middle"
   >
     <thead>
       <tr>
+        <th>Status</th>
         <th>Title</th>
         <th>Location</th>
         <th>Date</th>
@@ -15,6 +16,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let coachClass of coachClasses">
+        <td class="text-center">
+          <span
+            class="badge rounded-pill"
+            [ngClass]="getCoachClassStatusColor(coachClass.statusId)"
+            >{{ getCoachClassStatusById(coachClass.statusId) }}</span
+          >
+        </td>
         <td>{{ coachClass.title }}</td>
         <td>{{ coachClass.location }}</td>
         <td>{{ coachClass.classDate | date : "dd-MMM-yyyy HH:mm" }}</td>

@@ -1,3 +1,4 @@
+import { CoachClassService } from './../../services/coach-class.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faEdit, faXmark, faNoteSticky, faLocationDot, faCalendar, faClock, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Pagination } from 'src/app/shared/models/pagination.model';
@@ -21,7 +22,7 @@ export class CoachesClassesGridComponent implements OnInit {
   faEdit = faEdit;
   faXmark = faXmark;
 
-  constructor() { }
+  constructor(private coachClassService: CoachClassService) { }
 
   ngOnInit() {
   }
@@ -34,5 +35,13 @@ export class CoachesClassesGridComponent implements OnInit {
 
   onEdit(coachClassId: number) {
     this.selectedCoachClassId.emit(coachClassId);
+  }
+
+  getCoachClassStatusById(statusId: number): string {
+    return this.coachClassService.getCoachClassStatusById(statusId);
+  }
+
+  getCoachClassStatusColor(statusId: number): string {
+    return this.coachClassService.getCoachClassStatusColor(statusId);
   }
 }
