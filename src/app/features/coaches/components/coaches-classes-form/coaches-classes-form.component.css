@@ -1,7 +1,3 @@
-/* p-calendar {
-  display: flex !important;
-} */
-
 ::ng-deep.p-calendar {
   display: block !important;
 }
