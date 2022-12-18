@@ -58,7 +58,7 @@ export class CoachesClassesFormComponent implements OnInit {
       title: this.coachClass.title,
       location: this.coachClass.location,
       // classDate: formatDate(this.coachClass.classDate, 'dd-MMM-yyyy', 'en'),
-      classDate: new Date(this.coachClass.classDate),
+      classDate: this.coachClass.classDate,
       duration: this.coachClass.duration,
       availableSpaces: this.coachClass.availableSpaces,
       description: this.coachClass.description,
@@ -70,7 +70,6 @@ export class CoachesClassesFormComponent implements OnInit {
     this.coachClassService.getCoachClassById(this.config.data.id).subscribe({
       next: (coachClass: CoachClassResponse) => {
         this.coachClass = coachClass;
-        console.log('coach Class', this.coachClass);
       },
       error: (error: HttpErrorResponse) => {
         this.toasterService.error('Coach Class', error.error.error);

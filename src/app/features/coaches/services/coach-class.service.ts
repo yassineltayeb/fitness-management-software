@@ -1,6 +1,8 @@
+import { toLocalDate } from 'src/app/shared/helper/date.helper';
 import { CoachClassResponse } from './../models/coach-class-response.model';
 import { PagedResult } from './../../../shared/models/paged-result.model';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
@@ -29,23 +31,45 @@ export class CoachClassService {
 
     return this.http.get<PagedResult<CoachClassResponse>>(this.baseUrl, {
       params: queryParams
-    });
+    }).pipe(
+      map((coachClassResponse: PagedResult<CoachClassResponse>) => {
+        coachClassResponse.data.forEach((coachClass: CoachClassResponse) => {
+          coachClass.classDate = toLocalDate(coachClass.classDate);
+        });
+        return coachClassResponse;
+      }));
   }
 
   addCoachClass(coachClass: CoachClassRequest): Observable<CoachClassResponse> {
-    return this.http.post<CoachClassResponse>(this.baseUrl, coachClass);
+    return this.http.post<CoachClassResponse>(this.baseUrl, coachClass).pipe(
+      map((coachClassResponse: CoachClassResponse) => {
+        coachClassResponse.classDate = toLocalDate(coachClassResponse.classDate);
+        return coachClassResponse;
+      }));
   }
 
   getCoachClassById(coachClassId: number): Observable<CoachClassResponse> {
-    return this.http.get<CoachClassResponse>(this.baseUrl + '/' + coachClassId);
+    return this.http.get<CoachClassResponse>(this.baseUrl + '/' + coachClassId).pipe(
+      map((coachClassResponse: CoachClassResponse) => {
+        coachClassResponse.classDate = toLocalDate(coachClassResponse.classDate);
+        return coachClassResponse;
+      }));
   }
 
   updateCoachClass(coachClassId: number, coachClass: CoachClassRequest): Observable<CoachClassResponse> {
-    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId, coachClass);
+    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId, coachClass).pipe(
+      map((coachClassResponse: CoachClassResponse) => {
+        coachClassResponse.classDate = toLocalDate(coachClassResponse.classDate);
+        return coachClassResponse;
+      }));
   }
 
   updateCoachClassStatus(coachClassId: number, statusId: CoachClassStatus) {
-    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId + '/status/' + statusId, null);
+    return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId + '/status/' + statusId, null).pipe(
+      map((coachClassResponse: CoachClassResponse) => {
+        coachClassResponse.classDate = toLocalDate(coachClassResponse.classDate);
+        return coachClassResponse;
+      }));
   }
 
   /* ---------------------------- Status Functions ---------------------------- */
