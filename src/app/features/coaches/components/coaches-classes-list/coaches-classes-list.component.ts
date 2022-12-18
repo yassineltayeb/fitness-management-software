@@ -5,7 +5,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons'
 import { ConfirmationService } from 'primeng/api';
-import { CoachClassStatus } from 'src/app/core/enums/coach-class-status.enum';
 
 @Component({
   selector: 'app-coaches-classes-list',

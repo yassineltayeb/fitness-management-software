@@ -5,7 +5,6 @@ import { CoachClassService } from './../../services/coach-class.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { formatDate } from '@angular/common';
 import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { ToasterService } from 'src/app/shared/services/toaster.service';
 

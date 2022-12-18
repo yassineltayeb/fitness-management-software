@@ -14,7 +14,6 @@ import { KeyValuePairs } from 'src/app/shared/models/key-value-pairs.model';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { catchError, map } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-coach-profile',
