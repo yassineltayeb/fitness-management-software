@@ -1,10 +1,8 @@
-import { ToasterService } from './../../../../shared/services/toaster.service';
 import { CoachClassService } from './../../services/coach-class.service';
 import { CoachClassResponse } from './../../models/coach-class-response.model';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pagination } from 'src/app/shared/models/pagination.model';
 import { faEdit, faXmark } from '@fortawesome/free-solid-svg-icons'
-import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-coaches-classes-list',
@@ -21,9 +19,7 @@ export class CoachesClassesListComponent implements OnInit {
   faXmark = faXmark;
 
   constructor(
-    private coachClassService: CoachClassService,
-    private confirmationService: ConfirmationService,
-    private toasterService: ToasterService) { }
+    private coachClassService: CoachClassService) { }
 
   ngOnInit() {
   }

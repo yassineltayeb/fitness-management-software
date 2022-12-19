@@ -2,6 +2,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { UserType } from '../enums/user-type.enum';
 
 @Injectable({ providedIn: 'root' })
 export class LoggedInAuthGuardService implements CanActivate {
@@ -9,8 +10,11 @@ export class LoggedInAuthGuardService implements CanActivate {
   constructor(private authService: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    const currentUser = this.authService.getCurrentUser();
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['home']);
+      if (currentUser.userId == UserType.Coach) {
+        this.router.navigate(['coaches', currentUser.userId, 'home']);
+      }
       return false;
     }
 

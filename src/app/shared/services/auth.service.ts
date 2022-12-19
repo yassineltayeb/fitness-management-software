@@ -33,7 +33,9 @@ export class AuthService {
 
       this.setIsLoggedIn(true);
 
-      this.router.navigate(['/home']);
+      const currentUser = this.getCurrentUser();
+      const pageName = currentUser.userId == UserType.Coach ? 'coach' : 'member';
+      this.router.navigate([pageName, currentUser.userId, 'home']);
 
       return loginResponse;
     }));

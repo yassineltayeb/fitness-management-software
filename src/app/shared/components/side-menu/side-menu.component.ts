@@ -25,7 +25,6 @@ export class SideMenuComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser();
-    console.log('current user', this.currentUser);
   }
 
   toggleSidebar() {

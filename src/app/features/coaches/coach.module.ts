@@ -15,6 +15,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { CoachesClassesFormComponent } from './components/coaches-classes-form/coaches-classes-form.component';
 import { CalendarModule } from 'primeng/calendar';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CalendarModule } from 'primeng/calendar';
     ToastModule,
     PaginatorModule,
     DynamicDialogModule,
-    CalendarModule
+    CalendarModule,
+    FullCalendarModule
   ],
   exports: [
     CoachProfileComponent,
