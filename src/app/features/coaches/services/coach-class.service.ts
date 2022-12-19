@@ -8,6 +8,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CoachClassRequest } from '../models/coach-class-request.model';
 import { CoachClassStatus } from 'src/app/core/enums/coach-class-status.enum';
+import { CoachClassStatusSummaryResponse } from '../models/coach-class-status-summary-response.model';
 
 @Injectable(
   {
@@ -64,12 +65,16 @@ export class CoachClassService {
       }));
   }
 
-  updateCoachClassStatus(coachClassId: number, statusId: CoachClassStatus) {
+  updateCoachClassStatus(coachClassId: number, statusId: CoachClassStatus): Observable<CoachClassResponse> {
     return this.http.put<CoachClassResponse>(this.baseUrl + '/' + coachClassId + '/status/' + statusId, null).pipe(
       map((coachClassResponse: CoachClassResponse) => {
         coachClassResponse.classDate = toLocalDate(coachClassResponse.classDate);
         return coachClassResponse;
       }));
+  }
+
+  getCoachClassesStatusSummary(coachId: number): Observable<CoachClassStatusSummaryResponse> {
+    return this.http.get<CoachClassStatusSummaryResponse>(this.baseUrl + '/' + coachId + '/statusSummary');
   }
 
   /* ---------------------------- Status Functions ---------------------------- */
