@@ -22,7 +22,9 @@ export class CoachesClassesComponent implements OnInit {
   coachClasses = {} as PagedResult<CoachClassResponse>;
   public pagination = {} as Pagination;
   searchTerm: string = "";
+  classDates: Date[] = [];
   viewMode: ViewMode = 1;
+  statusId: CoachClassStatus = 0;
   faList = faList;
   faGrip = faGrip;
 
@@ -37,24 +39,31 @@ export class CoachesClassesComponent implements OnInit {
     this.getCoachClasses();
   }
 
+  onSelect() {
+    console.log(this.classDates);
+  }
+
   getCoachClasses() {
     this.spinner.show();
 
-    this.coachClassService.getCoachesClasses(this.searchTerm, this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
-      next: (coachClasses: PagedResult<CoachClassResponse>) => {
-        this.coachClasses = coachClasses;
-        this.pagination.itemsPerPage = coachClasses.itemsPerPage;
-        this.pagination.currentPage = coachClasses.currentPage;
-        this.pagination.totalItems = coachClasses.totalItems;
-      },
-      error: (error: HttpErrorResponse) => {
-        this.toaster.error('Classes', error.error.error);
-        this.spinner.hide();
-      },
-      complete: () => {
-        this.spinner.hide();
-      }
-    });
+    this.coachClassService.getCoachesClasses(
+      this.searchTerm, this.statusId,
+      this.classDates[0], this.classDates[1],
+      this.pagination.currentPage, this.pagination.itemsPerPage).subscribe({
+        next: (coachClasses: PagedResult<CoachClassResponse>) => {
+          this.coachClasses = coachClasses;
+          this.pagination.itemsPerPage = coachClasses.itemsPerPage;
+          this.pagination.currentPage = coachClasses.currentPage;
+          this.pagination.totalItems = coachClasses.totalItems;
+        },
+        error: (error: HttpErrorResponse) => {
+          this.toaster.error('Classes', error.error.error);
+          this.spinner.hide();
+        },
+        complete: () => {
+          this.spinner.hide();
+        }
+      });
   }
 
   /* --------------------------------- Events --------------------------------- */
@@ -63,8 +72,10 @@ export class CoachesClassesComponent implements OnInit {
     this.getCoachClasses();
   }
 
-  onViewModeChange(viewMode: number) {
-    this.viewMode = viewMode;
+  onStatusChang(statusId: number) {
+    this.statusId = statusId;
+    this.pagination.currentPage = 1;
+    this.getCoachClasses();
   }
 
   showCoachClassForm(coachClassId: number = 0) {

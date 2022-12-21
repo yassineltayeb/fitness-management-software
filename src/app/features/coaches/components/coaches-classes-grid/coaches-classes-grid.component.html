@@ -36,15 +36,15 @@
               </p>
             </div>
             <div class="row">
-              <p>
-                <fa-icon [icon]="faClock"></fa-icon>{{ coachClass.duration }}
-              </p>
-            </div>
-            <div class="row">
-              <p class="mb-0">
-                <fa-icon [icon]="faUsers"></fa-icon
-                >{{ coachClass.availableSpaces }}
-              </p>
+              <div class="d-flex justify-content-between pb-0">
+                <p class="mb-0 pb-0">
+                  <fa-icon [icon]="faClock"></fa-icon>{{ coachClass.duration }}
+                </p>
+                <p class="mb-0 pb-0">
+                  <fa-icon [icon]="faUsers"></fa-icon
+                  >{{ coachClass.availableSpaces }}
+                </p>
+              </div>
             </div>
           </div>
         </div>

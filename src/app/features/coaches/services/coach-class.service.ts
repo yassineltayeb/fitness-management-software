@@ -19,15 +19,32 @@ export class CoachClassService {
 
   constructor(private http: HttpClient) { }
 
-  getCoachesClasses(searchTerm: string, pageNumber: number, pageSize: number): Observable<PagedResult<CoachClassResponse>> {
+  getCoachesClasses(
+    searchTerm: string,
+    statusId: number | null,
+    classFrom: Date | null, classTo: Date | null,
+    pageNumber: number, pageSize: number): Observable<PagedResult<CoachClassResponse>> {
     let queryParams = new HttpParams();
 
     queryParams = queryParams.append('searchTerm', searchTerm);
     if (pageNumber) {
       queryParams = queryParams.append('pageNumber', pageNumber)
     };
+
+    if (statusId != 0) {
+      queryParams = queryParams.append('statusIds', statusId ?? 0)
+    };
+
     if (pageSize) {
       queryParams = queryParams.append('pageSize', pageSize);
+    }
+
+    if (classFrom) {
+      queryParams = queryParams.append('classFrom', toLocalDate(classFrom).toDateString());
+    }
+
+    if (classTo) {
+      queryParams = queryParams.append('classTo', toLocalDate(classTo).toDateString());
     }
 
     return this.http.get<PagedResult<CoachClassResponse>>(this.baseUrl, {

@@ -9,15 +9,33 @@
   </div>
   <div class="card-body">
     <form>
-      <div class="form-group">
-        <input
-          type="text"
-          name="searchTerm"
-          id="searchTerm"
-          class="form-control"
-          placeholder="Search Term"
-          [(ngModel)]="searchTerm"
-        />
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="form-group">
+            <input
+              type="text"
+              name="searchTerm"
+              id="searchTerm"
+              class="form-control"
+              placeholder="Search Term"
+              [(ngModel)]="searchTerm"
+            />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="from-group">
+            <p-calendar
+              name="classDates"
+              selectionMode="range"
+              dateFormat="dd-M-yy"
+              inputId="classDates"
+              appendTo="body"
+              [(ngModel)]="classDates"
+              placeholder="From - To"
+              (onSelect)="onSelect()"
+            ></p-calendar>
+          </div>
+        </div>
       </div>
     </form>
   </div>
@@ -29,43 +47,134 @@
 </div>
 <div class="card shadow mt-3">
   <div class="card-header">
-    <div
-      class="btn-group d-flex justify-content-end"
-      role="group"
-      aria-label="Basic radio toggle button group"
-    >
-      <div class="p-0 m-0">
-        <input
-          type="radio"
-          class="btn-check"
-          name="auth"
-          id="login"
-          autocomplete="off"
-          [checked]="viewMode == 1"
-        />
-        <label
-          (click)="onViewModeChange(1)"
-          class="btn btn-outline-primary"
-          for="login"
-          ><fa-icon [icon]="faList" size="lg"></fa-icon
-        ></label>
-      </div>
+    <div class="d-flex justify-content-between">
+      <!-- Status -->
+      <div
+        class="btn-group"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        <div class="pe-1 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="statusId"
+            id="all"
+            autocomplete="off"
+            [checked]="statusId == 0"
+          />
+          <label
+            (click)="onStatusChang(0)"
+            class="btn btn-outline-primary"
+            for="all"
+            ><span>All</span></label
+          >
+        </div>
 
-      <div class="user-type">
-        <input
-          type="radio"
-          class="btn-check"
-          name="auth"
-          id="signup"
-          autocomplete="off"
-          [checked]="viewMode == 2"
-        />
-        <label
-          (click)="onViewModeChange(2)"
-          class="btn btn-outline-primary"
-          for="signup"
-          ><fa-icon [icon]="faGrip" size="lg"></fa-icon
-        ></label>
+        <div class="pe-1 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="statusId"
+            id="booking"
+            autocomplete="off"
+            [checked]="statusId == 1"
+          />
+          <label
+            (click)="onStatusChang(1)"
+            class="btn btn-outline-primary"
+            for="booking"
+            ><span>Booking</span></label
+          >
+        </div>
+        <div class="pe-1 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="statusId"
+            id="onProgress"
+            autocomplete="off"
+            [checked]="statusId == 2"
+          />
+          <label
+            (click)="onStatusChang(2)"
+            class="btn btn-outline-primary"
+            for="onProgress"
+            ><span>On Progress</span></label
+          >
+        </div>
+        <div class="pe-1 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="statusId"
+            id="finished"
+            autocomplete="off"
+            [checked]="statusId == 3"
+          />
+          <label
+            (click)="onStatusChang(3)"
+            class="btn btn-outline-primary"
+            for="finished"
+            ><span>Finished</span></label
+          >
+        </div>
+        <div class="p-0 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="statusId"
+            id="canceled"
+            autocomplete="off"
+            [checked]="statusId == 4"
+          />
+          <label
+            (click)="onStatusChang(4)"
+            class="btn btn-outline-primary"
+            for="canceled"
+            ><span>Canceled</span></label
+          >
+        </div>
+      </div>
+      <!-- View Mode -->
+      <div
+        class="btn-group"
+        role="group"
+        aria-label="Basic radio toggle button group"
+      >
+        <div class="p-0 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="viewMode"
+            id="list"
+            autocomplete="off"
+            [checked]="viewMode == 1"
+          />
+          <label
+            (click)="viewMode = 1"
+            class="btn btn-outline-primary"
+            for="list"
+            ><fa-icon [icon]="faList" size="lg"></fa-icon
+          ></label>
+        </div>
+
+        <div class="p-0 m-0">
+          <input
+            type="radio"
+            class="btn-check"
+            name="viewMode"
+            id="grid"
+            autocomplete="off"
+            [checked]="viewMode == 2"
+          />
+          <label
+            (click)="viewMode = 2"
+            class="btn btn-outline-primary"
+            for="grid"
+            ><fa-icon [icon]="faGrip" size="lg"></fa-icon
+          ></label>
+        </div>
       </div>
     </div>
   </div>
