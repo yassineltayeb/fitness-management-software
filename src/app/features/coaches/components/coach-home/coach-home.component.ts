@@ -54,7 +54,7 @@ export class CoachHomeComponent implements OnInit {
   }
 
   populateEvents() {
-    this.coachClassService.getCoachesClasses('', null, null, null, 1, 1000).subscribe({
+    this.coachClassService.getCoachesClasses('', 0, null, null, 1, 1000).subscribe({
       next: (coachClasses: PagedResult<CoachClassResponse>) => {
         var events: any[] = [];
 
