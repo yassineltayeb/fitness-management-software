@@ -8,6 +8,8 @@ import { PagedResult } from 'src/app/shared/models/paged-result.model';
 import { CoachClassResponse } from '../../models/coach-class-response.model';
 import { formatDate } from '@angular/common';
 import { faTicket, faFlagCheckered, faXmark, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { DialogService } from 'primeng/dynamicdialog';
+import { CoachesClassesFormComponent } from '../coaches-classes-form/coaches-classes-form.component';
 
 @Component({
   selector: 'app-coach-home',
@@ -29,7 +31,8 @@ export class CoachHomeComponent implements OnInit {
 
   constructor(
     private coachClassService: CoachClassService,
-    private authService: AuthService
+    private authService: AuthService,
+    public dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -82,6 +85,18 @@ export class CoachHomeComponent implements OnInit {
   /* ----------------------------- Event Handlers ----------------------------- */
   handleDateClick(arg: any): void {
     console.log(arg.event._def.extendedProps);
+    this.showCoachClassForm(arg.event._def.extendedProps.coachClassId)
+  }
+
+  showCoachClassForm(coachClassId: number = 0) {
+    const ref = this.dialogService.open(CoachesClassesFormComponent, {
+      data: {
+        id: coachClassId,
+        readOnlyMode: true
+      },
+      header: 'Class Details',
+      width: '60%'
+    });
   }
 
 }

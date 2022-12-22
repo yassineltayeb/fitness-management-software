@@ -11,6 +11,7 @@
             placeholder="Title"
             class="form-control"
             formControlName="title"
+            [readonly]="readOnlyMode"
           />
           <span
             class="text-danger"
@@ -29,6 +30,7 @@
             placeholder="Location"
             class="form-control"
             formControlName="location"
+            [readonly]="readOnlyMode"
           />
           <span
             class="text-danger"
@@ -44,6 +46,7 @@
         <div class="from-group">
           <label class="form-label" for="classDate">Date/Time</label>
           <p-calendar
+            name="classDate"
             [showTime]="true"
             dateFormat="dd-M-yy"
             inputId="dateOfBirth"
@@ -67,6 +70,7 @@
             placeholder="0"
             class="form-control"
             formControlName="duration"
+            [readonly]="readOnlyMode"
           />
           <span
             class="text-danger"
@@ -88,6 +92,7 @@
             placeholder="0"
             class="form-control"
             formControlName="availableSpaces"
+            [readonly]="readOnlyMode"
           />
           <span
             class="text-danger"
@@ -104,6 +109,7 @@
             id="description"
             class="form-control"
             formControlName="description"
+            [readonly]="readOnlyMode"
           ></textarea>
           <span
             class="text-danger"
@@ -116,14 +122,16 @@
     <div class="row mt-3">
       <div class="d-flex justify-content-end">
         <button
-          class="btn btn-block btn-primary text-white me-3"
+          *ngIf="!readOnlyMode"
+          class="btn btn-block btn-primary text-white"
           type="submit"
           [disabled]="!coachClassForm.valid"
         >
           {{ coachClass.id == 0 ? "Save" : "Update" }}
         </button>
         <button
-          class="btn btn-block btn-secondary"
+          *ngIf="coachClass.id == 0"
+          class="btn btn-block btn-secondary ms-3"
           type="button"
           (click)="onClear()"
         >

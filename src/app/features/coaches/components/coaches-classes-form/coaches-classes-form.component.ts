@@ -16,6 +16,7 @@ import { ToasterService } from 'src/app/shared/services/toaster.service';
 export class CoachesClassesFormComponent implements OnInit {
   coachClassForm = {} as FormGroup;
   coachClass = {} as CoachClassResponse;
+  readOnlyMode: boolean = false;
 
   constructor(
     private coachClassService: CoachClassService,
@@ -27,6 +28,7 @@ export class CoachesClassesFormComponent implements OnInit {
 
   ngOnInit() {
     this.coachClass.id = this.config.data.id;
+    this.readOnlyMode = this.config.data.readOnlyMode;
 
     this.initForm();
     if (this.coachClass.id != 0) {
@@ -38,7 +40,11 @@ export class CoachesClassesFormComponent implements OnInit {
     this.coachClassForm = new FormGroup({
       title: new FormControl('', Validators.required),
       location: new FormControl('', Validators.required),
-      classDate: new FormControl('', Validators.required),
+      classDate: new FormControl(
+        {
+          value: '',
+          disabled: this.readOnlyMode
+        }, Validators.required),
       duration: new FormControl(0, [
         Validators.required,
         Validators.min(1)

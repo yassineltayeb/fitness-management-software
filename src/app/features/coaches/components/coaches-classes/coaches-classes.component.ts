@@ -81,7 +81,8 @@ export class CoachesClassesComponent implements OnInit {
   showCoachClassForm(coachClassId: number = 0) {
     const ref = this.dialogService.open(CoachesClassesFormComponent, {
       data: {
-        id: coachClassId
+        id: coachClassId,
+        readOnlyMode: false
       },
       header: (coachClassId == 0) ? 'Add New Class' : 'Update Class',
       width: '60%'
